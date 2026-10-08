@@ -5,14 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Airjetplan | Brokerage & Aviación Ejecutiva</title>
   
-  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Font Awesome Icons & Favicon -->
   <link rel="icon" href="https://raw.githubusercontent.com/systemgregorypc666/Airjetplan/refs/heads/main/a/img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <!-- Inter Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,20 +16,9 @@
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
           colors: {
-            brand: {
-              50: '#f0f7ff',
-              100: '#e0effe',
-              500: '#0284c7',
-              600: '#0369a1',
-              700: '#1d4ed8',
-              800: '#1e40af',
-              900: '#0f172a',
-              accent: '#2563eb'
-            }
+            brand: { 50: '#f0f7ff', 100: '#e0effe', 500: '#0284c7', 600: '#0369a1', 700: '#1d4ed8', 800: '#1e40af', 900: '#0f172a' }
           }
         }
       }
@@ -43,14 +27,8 @@
   
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .active-nav {
-      color: #2563eb !important;
-      border-bottom: 2px solid #2563eb;
-    }
-    .tab-content {
-      display: none;
-      animation: fadeIn 0.3s ease-in-out;
-    }
+    .active-nav { color: #2563eb !important; border-bottom: 2px solid #2563eb; }
+    .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
     .tab-content.active { display: block; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
@@ -58,16 +36,15 @@
     }
   </style>
 </head>
-<body class="flex flex-col min-h-screen bg-white text-slate-800 antialiased selection:bg-blue-100 selection:text-blue-900">
+<body class="flex flex-col min-h-screen bg-white text-slate-800 antialiased">
 
-  <!-- HEADER / NAVBAR -->
+  <!-- HEADER -->
   <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         
-        <!-- Brand Logo -->
         <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('principal')">
-          <div class="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center shadow-md shadow-blue-200">
+          <div class="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center shadow-md">
             <i class="fa-solid fa-plane-up text-lg"></i>
           </div>
           <div>
@@ -76,439 +53,345 @@
           </div>
         </div>
 
-        <!-- Desktop Navigation Menu -->
         <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
-          <button id="nav-principal" onclick="switchTab('principal')" class="nav-link active-nav py-2 transition-colors hover:text-blue-600">
-            Principal
+          <button id="nav-principal" onclick="switchTab('principal')" class="nav-link active-nav py-2 hover:text-blue-600">Principal</button>
+          <button id="nav-productos" onclick="switchTab('productos')" class="nav-link py-2 hover:text-blue-600">Aeronaves</button>
+          <button id="nav-tarifas" onclick="switchTab('tarifas')" class="nav-link py-2 hover:text-blue-600 text-amber-600 flex items-center gap-1">
+            <i class="fa-solid fa-tag text-xs"></i> Tarifas & Suscripciones
           </button>
-          <button id="nav-productos" onclick="switchTab('productos')" class="nav-link py-2 transition-colors hover:text-blue-600">
-            Productos
-          </button>
-          <button id="nav-contacto" onclick="switchTab('contacto')" class="nav-link py-2 transition-colors hover:text-blue-600">
-            Contacto
-          </button>
-          <button id="nav-panel" onclick="switchTab('panel')" class="nav-link py-2 px-3 rounded-lg bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-all flex items-center gap-2">
-            <i class="fa-solid fa-sliders text-xs text-blue-700"></i>
-            Panel Control
+          <button id="nav-contacto" onclick="switchTab('contacto')" class="nav-link py-2 hover:text-blue-600">Contacto</button>
+          <button id="nav-panel" onclick="switchTab('panel')" class="nav-link py-2 px-3 rounded-lg bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-xs text-blue-700"></i> Panel Control
           </button>
         </nav>
 
-        <!-- CTA & Mobile Menu Toggle -->
         <div class="flex items-center space-x-3">
-          <a href="https://wa.me/584161177334?text=Hola%20Airjetplan,%20deseo%20consultar%20sobre%20una%20aeronave." target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-all hover:shadow">
-            <i class="fa-brands fa-whatsapp text-sm"></i>
-            Broker Directo
+          <a href="https://wa.me/584161177334?text=Hola%20Airjetplan,%20deseo%20consultar%20sobre%20una%20aeronave." target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm">
+            <i class="fa-brands fa-whatsapp text-sm"></i> Broker Directo
           </a>
-          
-          <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 p-2 rounded-lg hover:bg-slate-100 focus:outline-none">
-            <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
-          </button>
+          <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 p-2"><i class="fa-solid fa-bars text-xl"></i></button>
         </div>
       </div>
     </div>
 
-    <!-- Mobile Dropdown Navigation -->
-    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-100 bg-white px-4 pt-2 pb-4 space-y-2 font-medium text-slate-700 shadow-lg">
-      <button onclick="switchTab('principal'); toggleMobileMenu();" class="block w-full text-left py-2.5 px-3 rounded-md hover:bg-slate-50">Principal</button>
-      <button onclick="switchTab('productos'); toggleMobileMenu();" class="block w-full text-left py-2.5 px-3 rounded-md hover:bg-slate-50">Productos (Aeronaves)</button>
-      <button onclick="switchTab('contacto'); toggleMobileMenu();" class="block w-full text-left py-2.5 px-3 rounded-md hover:bg-slate-50">Contacto</button>
-      <button onclick="switchTab('panel'); toggleMobileMenu();" class="block w-full text-left py-2.5 px-3 rounded-md bg-slate-50 text-blue-700 font-semibold">Panel Control</button>
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-100 bg-white px-4 pt-2 pb-4 space-y-2 font-medium text-slate-700">
+      <button onclick="switchTab('principal'); toggleMobileMenu();" class="block w-full text-left py-2 px-3">Principal</button>
+      <button onclick="switchTab('productos'); toggleMobileMenu();" class="block w-full text-left py-2 px-3">Aeronaves</button>
+      <button onclick="switchTab('tarifas'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 text-amber-600 font-bold">Tarifas & Suscripciones</button>
+      <button onclick="switchTab('contacto'); toggleMobileMenu();" class="block w-full text-left py-2 px-3">Contacto</button>
+      <button onclick="switchTab('panel'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 bg-slate-50 text-blue-700">Panel Control</button>
     </div>
   </header>
 
-  <!-- MAIN CONTENT CONTAINER -->
   <main class="flex-grow">
     
-    <!-- HERO SECTION -->
-    <section class="bg-gradient-to-b from-slate-50 via-white to-white py-12 md:py-16 border-b border-slate-100">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-100 text-blue-700 text-xs font-semibold mb-6">
-          <span class="flex h-2 w-2 rounded-full bg-blue-600 animate-pulse"></span>
-          Mercado Global &amp; Corretaje de Aviación Privada
-        </div>
-
-        <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-blue-700 mb-4">
-          Airjetplan
-        </h1>
-        
-        <p class="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto font-normal leading-relaxed">
-          Plataforma especializada en compra, venta y fletamento de avionetas, turbohélices y jets ejecutivos en América y Europa.
-        </p>
-
-        <!-- Quick Search Bar -->
-        <div class="mt-8 max-w-3xl mx-auto bg-white p-3 sm:p-4 rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-200/80 flex flex-col sm:flex-row items-center gap-3">
-          <div class="w-full sm:w-1/3 text-left">
-            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider px-2 mb-1">Tipo de Aeronave</label>
-            <select id="hero-type-filter" class="w-full bg-slate-50 text-slate-800 text-sm font-semibold rounded-lg p-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <option value="all">Todas las Aeronaves</option>
-              <option value="monomotor">Monomotores / Avionetas</option>
-              <option value="turboprop">Turbohélices</option>
-              <option value="jet">Jets Ejecutivos</option>
-            </select>
-          </div>
-
-          <div class="w-full sm:w-1/3 text-left">
-            <label class="block text-xs font-bold text-slate-400 uppercase tracking-wider px-2 mb-1">Ubicación / Matrícula</label>
-            <select id="hero-region-filter" class="w-full bg-slate-50 text-slate-800 text-sm font-semibold rounded-lg p-2.5 border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <option value="all">Todas las Regiones</option>
-              <option value="us">Estados Unidos (Matrícula N)</option>
-              <option value="eu">Europa (EASA)</option>
-              <option value="latam">Latinoamérica &amp; Caribe</option>
-            </select>
-          </div>
-
-          <div class="w-full sm:w-1/3 sm:self-end">
-            <button onclick="executeHeroSearch()" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2.5 px-4 rounded-lg shadow transition-all flex items-center justify-center gap-2">
-              <i class="fa-solid fa-magnifying-glass text-xs"></i>
-              Explorar Catálogo
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
     <!-- TAB 1: PRINCIPAL -->
-    <section id="tab-principal" class="tab-content active max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      
+    <section id="tab-principal" class="tab-content active max-w-7xl mx-auto px-4 py-12">
+      <div class="text-center mb-12">
+        <h1 class="text-4xl sm:text-6xl font-black text-blue-700 mb-4">Airjetplan</h1>
+        <p class="text-slate-600 max-w-2xl mx-auto">Plataforma internacional de corretaje e intermediación para la venta de aeronaves ejecutivas y privadas.</p>
+      </div>
+
       <div class="grid md:grid-cols-3 gap-8 mb-16">
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-md transition-shadow">
-          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4 text-xl">
-            <i class="fa-solid fa-handshake"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Brokerage Internacional</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Conectamos compradores y vendedores mediante contratos de corretaje transparentes (3% - 5% comisión).
-          </p>
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
+          <i class="fa-solid fa-handshake text-2xl text-blue-700 mb-3"></i>
+          <h3 class="font-bold text-lg mb-1">Corretaje Transparente</h3>
+          <p class="text-xs text-slate-600">Gestión de comisiones acordadas del 3% al 5% garantizando protección al propietario y comprador.</p>
         </div>
-
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-md transition-shadow">
-          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4 text-xl">
-            <i class="fa-solid fa-file-shield"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Inspección &amp; Historial TTAF/SMOH</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Verificación técnica rigurosa de horas de celda, remanente de motores y actualización de aviónica.
-          </p>
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
+          <i class="fa-solid fa-shield-halved text-2xl text-blue-700 mb-3"></i>
+          <h3 class="font-bold text-lg mb-1">Privacidad de Contacto</h3>
+          <p class="text-xs text-slate-600">Los datos del propietario se resguardan de forma privada en nuestro servidor administrado.</p>
         </div>
-
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-md transition-shadow">
-          <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4 text-xl">
-            <i class="fa-solid fa-globe"></i>
-          </div>
-          <h3 class="text-lg font-bold text-slate-900 mb-2">Logística Global &amp; Vuelos Charter</h3>
-          <p class="text-slate-600 text-sm leading-relaxed">
-            Organización de vuelos trasatlánticos, matriculación y servicios de taxi aéreo privado.
-          </p>
+        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
+          <i class="fa-solid fa-globe text-2xl text-blue-700 mb-3"></i>
+          <h3 class="font-bold text-lg mb-1">Red Global</h3>
+          <p class="text-xs text-slate-600">Promoción directa para compradores en América Latina, Estados Unidos y Europa.</p>
         </div>
       </div>
-
-      <!-- Commission Calculator -->
-      <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl mb-16">
-        <div class="max-w-3xl">
-          <span class="text-blue-400 font-bold uppercase tracking-wider text-xs">Herramienta de Simulación</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold mt-1 mb-4">Calculadora de Comisión y Retorno de Corretaje</h2>
-          <p class="text-slate-400 text-sm mb-8">
-            Estima el margen de ganancia por intermediación según el valor estimado de la aeronave.
-          </p>
-        </div>
-
-        <div class="grid md:grid-cols-3 gap-6 bg-slate-800/80 p-6 rounded-2xl border border-slate-700">
-          <div>
-            <label class="block text-xs text-slate-300 font-semibold mb-2">Precio de Venta ($ USD)</label>
-            <input type="number" id="calc-price" value="120000" step="5000" oninput="calculateCommission()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white font-bold focus:outline-none focus:border-blue-500">
-          </div>
-          <div>
-            <label class="block text-xs text-slate-300 font-semibold mb-2">Porcentaje de Comisión (%)</label>
-            <select id="calc-rate" onchange="calculateCommission()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white font-bold focus:outline-none focus:border-blue-500">
-              <option value="0.05">5% (Monomotores)</option>
-              <option value="0.04">4% (Turbohélices)</option>
-              <option value="0.03">3% (Jets Ejecutivos)</option>
-            </select>
-          </div>
-          <div class="bg-blue-900/40 p-4 rounded-xl border border-blue-500/30 flex flex-col justify-center">
-            <span class="text-xs text-blue-300 font-semibold">Comisión Estimada</span>
-            <span id="calc-result" class="text-2xl sm:text-3xl font-extrabold text-blue-400">$6,000 USD</span>
-          </div>
-        </div>
-      </div>
-
     </section>
 
     <!-- TAB 2: PRODUCTOS -->
-    <section id="tab-productos" class="tab-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 pb-6 border-b border-slate-200">
-        <div>
-          <h2 class="text-2xl font-extrabold text-slate-900">Catálogo de Aeronaves</h2>
-          <p class="text-slate-500 text-sm">Inventario sincronizado con la base de datos de Airjetplan.</p>
-        </div>
+    <section id="tab-productos" class="tab-content max-w-7xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-extrabold text-slate-900 mb-6">Catálogo Público de Aeronaves</h2>
+      <div id="catalog-aircraft-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </section>
+
+    <!-- TAB 3: TARIFAS & SUSCRIPCIONES -->
+    <section id="tab-tarifas" class="tab-content max-w-7xl mx-auto px-4 py-12">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Planes de Publicación</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Tarifas de Suscripción & Corretaje</h2>
+        <p class="text-slate-500 text-sm mt-2">Publica tu aeronave en nuestra red internacional. Selecciona el plan que mejor se adapte a tus necesidades de venta.</p>
       </div>
 
-      <!-- Main Aircraft Grid Container -->
-      <div id="catalog-aircraft-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Dynamic Aircraft Cards loaded via JS -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Plan Básico -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-full">Publicación Básica</span>
+            <div class="mt-4 mb-6">
+              <span class="text-4xl font-black text-slate-900">$99</span>
+              <span class="text-slate-500 text-xs">/ 3 meses</span>
+            </div>
+            <ul class="text-xs text-slate-600 space-y-3 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Ficha técnica en catálogo global</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Botón de consulta directa a Broker</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Datos de propietario 100% privados</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Comisión de éxito: 5% al vender</li>
+            </ul>
+          </div>
+          <button onclick="switchTab('panel')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-3 rounded-xl text-xs">Publicar Ahora</button>
+        </div>
+
+        <!-- Plan VIP / Destacado -->
+        <div class="bg-blue-900 text-white p-8 rounded-3xl border-2 border-blue-500 shadow-xl flex flex-col justify-between relative overflow-hidden">
+          <div class="absolute -right-8 -top-8 bg-blue-600 text-white text-[10px] font-bold px-8 py-3 rotate-45">RECOMENDADO</div>
+          <div>
+            <span class="text-xs font-bold bg-blue-700 text-blue-200 px-3 py-1 rounded-full">Plan Premium VIP</span>
+            <div class="mt-4 mb-6">
+              <span class="text-4xl font-black text-white">$249</span>
+              <span class="text-blue-200 text-xs">/ 6 meses</span>
+            </div>
+            <ul class="text-xs text-blue-100 space-y-3 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Todo lo del Plan Básico</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Posición destacada en Portada</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Promoción directa a red de compradores</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Verificación prioritaria de TTAF/SMOH</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Comisión preferencial: 4% al vender</li>
+            </ul>
+          </div>
+          <button onclick="switchTab('panel')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs">Elegir VIP</button>
+        </div>
+
+        <!-- Plan Corretaje Exclusivo -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Contrato Exclusivo</span>
+            <div class="mt-4 mb-6">
+              <span class="text-4xl font-black text-slate-900">$0</span>
+              <span class="text-slate-500 text-xs"> Costo Inicial</span>
+            </div>
+            <ul class="text-xs text-slate-600 space-y-3 mb-6">
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Sin tarifa de publicación inicial</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Agente dedicado a la venta de tu equipo</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Campaña publicitaria internacional</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Exclusividad de corretaje por 180 días</li>
+              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Comisión de éxito: 3% - 5%</li>
+            </ul>
+          </div>
+          <button onclick="switchTab('contacto')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs">Solicitar Exclusiva</button>
+        </div>
       </div>
     </section>
 
-    <!-- TAB 3: CONTACTO -->
-    <section id="tab-contacto" class="tab-content max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- TAB 4: CONTACTO -->
+    <section id="tab-contacto" class="tab-content max-w-5xl mx-auto px-4 py-12">
       <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden grid md:grid-cols-5">
-        
         <div class="md:col-span-2 bg-blue-700 text-white p-8 flex flex-col justify-between">
           <div>
-            <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-6">
-              <i class="fa-solid fa-headset text-xl"></i>
-            </div>
-            <h3 class="text-2xl font-bold mb-2">Contacto Broker</h3>
-            <p class="text-blue-100 text-sm mb-8 leading-relaxed">
-              Atendemos solicitudes de compra, venta y charters a nivel mundial.
-            </p>
-
-            <div class="space-y-4 text-sm">
-              <div class="flex items-start gap-3">
-                <i class="fa-solid fa-location-dot mt-1 text-blue-300"></i>
-                <span>San Cristóbal, Táchira, Venezuela</span>
-              </div>
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-envelope text-blue-300"></i>
-                <span>contacto@airjetplan.com</span>
-              </div>
+            <h3 class="text-2xl font-bold mb-2">Oficina de Corretaje</h3>
+            <p class="text-blue-100 text-sm mb-6">Atención directa para propietarios y compradores.</p>
+            <div class="space-y-3 text-xs">
+              <p><i class="fa-solid fa-location-dot mr-2"></i> San Cristóbal, Táchira, Venezuela</p>
+              <p><i class="fa-solid fa-phone mr-2"></i> +58 416 1177334</p>
+              <p><i class="fa-solid fa-envelope mr-2"></i> contacto@airjetplan.com</p>
             </div>
           </div>
         </div>
-
         <div class="md:col-span-3 p-8">
-          <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
-            <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Nombre Completo</label>
-              <input type="text" required placeholder="Ej. Capitán Carlos Mendoza" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-
-            <div class="grid grid-cols-2 gap-4">
-              <div>
-                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Correo Electrónico</label>
-                <input type="email" required placeholder="cliente@correo.com" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-              </div>
-              <div>
-                <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Teléfono / WhatsApp</label>
-                <input type="tel" required placeholder="+58 412..." class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Mensaje</label>
-              <textarea rows="4" required placeholder="Detalles de la consulta..." class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-            </div>
-
-            <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 px-6 rounded-lg shadow-md transition-all">
-              Enviar Mensaje
-            </button>
+          <form onsubmit="handleFormSubmit(event)" class="space-y-4 text-xs">
+            <input type="text" required placeholder="Nombre Completo" class="w-full bg-slate-50 border p-3 rounded-lg">
+            <input type="email" required placeholder="Correo Electrónico" class="w-full bg-slate-50 border p-3 rounded-lg">
+            <textarea rows="4" required placeholder="Escriba su consulta o detalle de la aeronave..." class="w-full bg-slate-50 border p-3 rounded-lg"></textarea>
+            <button type="submit" class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg">Enviar Mensaje</button>
           </form>
         </div>
-
       </div>
     </section>
 
-    <!-- TAB 4: PANEL CONTROL -->
-    <section id="tab-panel" class="tab-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      
+    <!-- TAB 5: PANEL CONTROL (ADMIN / VENDEDOR) -->
+    <section id="tab-panel" class="tab-content max-w-7xl mx-auto px-4 py-10">
       <div class="flex items-center justify-between mb-8">
         <div>
-          <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Administrador Airjetplan</span>
-          <h2 class="text-2xl font-extrabold text-slate-900">Panel de Control &amp; Gestión Cloudflare KV</h2>
-        </div>
-        <div class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-200">
-          <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          Conectado a Base de Datos
+          <span class="text-xs font-bold text-blue-700 uppercase">Gestión de Publicaciones</span>
+          <h2 class="text-2xl font-extrabold text-slate-900">Registro & Administración KV</h2>
         </div>
       </div>
 
       <div class="grid lg:grid-cols-3 gap-8">
-        
-        <!-- Add Aircraft Form -->
+        <!-- Formulario con campos de Propietario -->
         <div class="lg:col-span-1 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-plus-circle text-blue-700"></i>
-            Agregar Nueva Aeronave
+            <i class="fa-solid fa-plus-circle text-blue-700"></i> Publicar Nueva Aeronave
           </h3>
 
-          <form id="add-aircraft-form" onsubmit="addNewAircraft(event)" class="space-y-4 text-xs">
+          <form id="add-aircraft-form" onsubmit="addNewAircraft(event)" class="space-y-3 text-xs">
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">Título / Modelo</label>
-              <input type="text" id="admin-title" required placeholder="Ej. Cessna 182 Skylane" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+              <label class="block font-semibold mb-1">Modelo / Título</label>
+              <input type="text" id="admin-title" required placeholder="Ej. Cessna 208 Caravan" class="w-full bg-slate-50 border rounded-lg p-2.5">
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-2 gap-2">
               <div>
-                <label class="block font-semibold text-slate-700 mb-1">Categoría</label>
-                <select id="admin-category" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+                <label class="block font-semibold mb-1">Categoría</label>
+                <select id="admin-category" class="w-full bg-slate-50 border rounded-lg p-2.5">
                   <option value="monomotor">Monomotor</option>
                   <option value="turboprop">Turbohélice</option>
                   <option value="jet">Jet Ejecutivos</option>
                 </select>
               </div>
               <div>
-                <label class="block font-semibold text-slate-700 mb-1">Precio ($ USD)</label>
-                <input type="number" id="admin-price" required placeholder="140000" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+                <label class="block font-semibold mb-1">Precio ($ USD)</label>
+                <input type="number" id="admin-price" required placeholder="250000" class="w-full bg-slate-50 border rounded-lg p-2.5">
               </div>
             </div>
 
-            <div class="grid grid-cols-2 gap-3">
+            <div class="grid grid-cols-2 gap-2">
               <div>
-                <label class="block font-semibold text-slate-700 mb-1">Año</label>
-                <input type="number" id="admin-year" required placeholder="1982" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+                <label class="block font-semibold mb-1">Año</label>
+                <input type="number" id="admin-year" required placeholder="1995" class="w-full bg-slate-50 border rounded-lg p-2.5">
               </div>
               <div>
-                <label class="block font-semibold text-slate-700 mb-1">Horas Motor (SMOH)</label>
-                <input type="text" id="admin-smoh" required placeholder="450 hrs" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+                <label class="block font-semibold mb-1">Motor (SMOH)</label>
+                <input type="text" id="admin-smoh" required placeholder="300 hrs" class="w-full bg-slate-50 border rounded-lg p-2.5">
               </div>
             </div>
 
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">Ubicación / Matrícula</label>
-              <input type="text" id="admin-location" required placeholder="EE. UU. / Reg. N1234X" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+              <label class="block font-semibold mb-1">Ubicación / Matrícula</label>
+              <input type="text" id="admin-location" required placeholder="Venezuela / Matrícula YV" class="w-full bg-slate-50 border rounded-lg p-2.5">
             </div>
 
             <div>
-              <label class="block font-semibold text-slate-700 mb-1">URL Fotografía</label>
-              <input type="url" id="admin-image" placeholder="https://..." class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+              <label class="block font-semibold mb-1">URL Fotografía</label>
+              <input type="url" id="admin-image" placeholder="https://..." class="w-full bg-slate-50 border rounded-lg p-2.5">
             </div>
 
-            <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 rounded-lg shadow transition-all">
-              Guardar en Base de Datos KV
+            <!-- Sección Privada del Propietario -->
+            <div class="pt-3 border-t border-slate-200 mt-2 bg-slate-50 p-3 rounded-lg border">
+              <span class="block font-bold text-slate-800 text-[11px] mb-2 text-blue-700">🔒 Datos Privados del Propietario (No públicos)</span>
+              <div class="space-y-2">
+                <input type="text" id="seller-name" required placeholder="Nombre Propietario / Vendedor" class="w-full bg-white border rounded p-2">
+                <input type="tel" id="seller-phone" required placeholder="WhatsApp / Teléfono Contacto" class="w-full bg-white border rounded p-2">
+                <input type="email" id="seller-email" placeholder="Correo Electrónico Vendedor" class="w-full bg-white border rounded p-2">
+              </div>
+            </div>
+
+            <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 rounded-lg shadow">
+              Enviar para Revisión KV
             </button>
           </form>
         </div>
 
-        <!-- Inventory Table -->
+        <!-- Tabla de Gestión Admin con Datos Privados -->
         <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center justify-between">
-            <span>Listado General KV</span>
-            <span id="inventory-count" class="text-xs bg-blue-100 text-blue-800 px-2.5 py-1 rounded-full font-bold">0 Unidades</span>
-          </h3>
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-base font-bold text-slate-900">Listado General en Servidor KV</h3>
+            <button onclick="loadAdminWithKey()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded-lg">
+              🔑 Ver Datos Privados Vendedor
+            </button>
+          </div>
 
           <div class="overflow-x-auto">
             <table class="w-full text-left text-xs">
-              <thead class="bg-slate-50 text-slate-500 uppercase font-bold border-b border-slate-200">
+              <thead class="bg-slate-50 text-slate-500 uppercase font-bold border-b">
                 <tr>
                   <th class="p-3">Aeronave</th>
-                  <th class="p-3">Categoría</th>
                   <th class="p-3">Precio</th>
+                  <th class="p-3">Contacto Vendedor (Privado)</th>
                   <th class="p-3">Estado</th>
                   <th class="p-3 text-right">Acción</th>
                 </tr>
               </thead>
-              <tbody id="admin-inventory-table" class="divide-y divide-slate-100 text-slate-700 font-medium">
-                <!-- Table rows populated dynamically via KV -->
-              </tbody>
+              <tbody id="admin-inventory-table" class="divide-y divide-slate-100 font-medium"></tbody>
             </table>
           </div>
         </div>
-
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
-  <footer class="bg-slate-900 text-white border-t border-slate-800 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center text-xs text-slate-400 font-normal">
-      <p class="mb-1">@ 2022-2026 Airjetplan. Todos los derechos reservados.</p>
-      <p class="text-[10px] text-slate-400">Desarrollado e impulsado por System Gregory PC Technology Services.</p>
-    </div>
+  <footer class="bg-slate-900 text-white border-t border-slate-800 mt-auto py-8 text-center text-xs text-slate-400">
+    <p>@ 2022-2026 Airjetplan. Todos los derechos reservados.</p>
+    <p class="text-[10px] text-slate-500 mt-1">Desarrollado e impulsado por System Gregory PC Technology Services.</p>
   </footer>
 
-  <!-- Modal Overlay -->
+  <!-- Modal Notification -->
   <div id="modal-notice" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl border border-slate-100">
-      <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
-        <i class="fa-solid fa-check"></i>
-      </div>
-      <h3 id="modal-title" class="text-lg font-bold text-slate-900 mb-2">Operación Exitosa</h3>
-      <p id="modal-msg" class="text-xs text-slate-600 mb-6 leading-relaxed">Procesado en el servidor.</p>
-      <button onclick="closeModal()" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 rounded-lg text-xs">
-        Aceptar
-      </button>
+    <div class="bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl">
+      <h3 id="modal-title" class="text-lg font-bold text-slate-900 mb-2">Notificación</h3>
+      <p id="modal-msg" class="text-xs text-slate-600 mb-6"></p>
+      <button onclick="closeModal()" class="w-full bg-blue-700 text-white font-bold py-2 rounded-lg text-xs">Aceptar</button>
     </div>
   </div>
 
-  <!-- BACKEND CONNECTED JAVASCRIPT LOGIC -->
   <script>
     const API_URL = '/api';
 
-    // 1. Cargar aeronaves desde Cloudflare KV
-    async function loadAircrafts() {
+    async function loadAircrafts(adminKey = '') {
       try {
-        const response = await fetch(API_URL);
+        const fetchUrl = adminKey ? `${API_URL}?adminKey=${encodeURIComponent(adminKey)}` : API_URL;
+        const response = await fetch(fetchUrl);
         if (!response.ok) return;
         const data = await response.json();
         
-        // Catálogo público: solo muestra las aprobadas
         const publicCatalog = data.filter(item => item.status === 'aprobado');
         renderPublicCatalog(publicCatalog);
-
-        // Panel de control: muestra todas (pendientes y aprobadas)
-        renderAdminTable(data);
+        renderAdminTable(data, !!adminKey);
       } catch (error) {
         console.error('Error al conectar con la API KV:', error);
       }
     }
 
-    // 2. Renderizar catálogo público
     function renderPublicCatalog(items) {
       const container = document.getElementById('catalog-aircraft-grid');
       if (!container) return;
 
       if (items.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">No hay aeronaves aprobadas en la base de datos KV.</div>`;
+        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">No hay aeronaves aprobadas disponibles públicamente.</div>`;
         return;
       }
 
       container.innerHTML = items.map(a => `
-        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between">
           <div>
             <div class="relative h-48 bg-slate-100 overflow-hidden">
-              <img src="${a.image || 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80'}" alt="${a.title}" class="w-full h-full object-cover">
-              <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
-                ${a.category}
-              </span>
-              <span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-black px-2.5 py-1 rounded-md shadow">
-                $${Number(a.price).toLocaleString()} ${a.currency || 'USD'}
-              </span>
+              <img src="${a.image || 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80'}" class="w-full h-full object-cover">
+              <span class="absolute top-3 left-3 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-1 rounded">${a.category}</span>
+              <span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-black px-2.5 py-1 rounded">$${Number(a.price).toLocaleString()} USD</span>
             </div>
             <div class="p-5">
-              <h3 class="text-lg font-extrabold text-slate-900 mb-2">${a.title} (${a.year || 'N/D'})</h3>
-              <div class="space-y-1.5 text-xs text-slate-500 mb-4">
-                <div class="flex items-center gap-2"><i class="fa-solid fa-gauge-high text-blue-600 w-4"></i> Motor (SMOH): <span class="font-semibold text-slate-700">${a.smoh || 'N/D'}</span></div>
-                <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-blue-600 w-4"></i> Ubicación: <span class="font-semibold text-slate-700">${a.location || 'N/D'}</span></div>
-              </div>
+              <h3 class="text-lg font-extrabold mb-1">${a.title} (${a.year || 'N/D'})</h3>
+              <p class="text-xs text-slate-500 mb-3">SMOH: ${a.smoh || 'N/D'} | Ubicación: ${a.location || 'N/D'}</p>
             </div>
           </div>
           <div class="p-5 pt-0">
-            <a href="https://wa.me/584161177334?text=Hola,%20deseo%20información%20de%20la%20aeronave:%20${encodeURIComponent(a.title)}" 
-               target="_blank" 
-               class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2.5 px-4 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
-              <i class="fa-solid fa-paper-plane"></i> Consultar Broker
+            <a href="https://wa.me/584161177334?text=Hola,%20deseo%20información%20de%20la%20aeronave:%20${encodeURIComponent(a.title)}" target="_blank" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors">
+              <i class="fa-solid fa-paper-plane"></i> Consultar Broker Directo
             </a>
           </div>
         </div>
       `).join('');
     }
 
-    // 3. Renderizar tabla en el Panel de Control
-    function renderAdminTable(items) {
+    function renderAdminTable(items, isUnlocked = false) {
       const tbody = document.getElementById('admin-inventory-table');
-      const countEl = document.getElementById('inventory-count');
       if (!tbody) return;
 
-      if (countEl) countEl.innerText = `${items.length} Unidades`;
-
       tbody.innerHTML = items.map(a => `
-        <tr class="hover:bg-slate-50 transition-colors">
-          <td class="p-3 font-bold text-slate-900">${a.title}</td>
-          <td class="p-3 uppercase text-[10px] font-bold text-blue-700">${a.category}</td>
-          <td class="p-3 font-semibold text-slate-800">$${Number(a.price).toLocaleString()} USD</td>
+        <tr class="hover:bg-slate-50">
+          <td class="p-3 font-bold">${a.title}</td>
+          <td class="p-3 font-semibold text-blue-700">$${Number(a.price).toLocaleString()} USD</td>
+          <td class="p-3">
+            ${isUnlocked ? `
+              <div class="text-[11px] bg-slate-100 p-1.5 rounded border">
+                <p><strong>Propietario:</strong> ${a.sellerName || 'N/D'}</p>
+                <p><strong>Tel/WA:</strong> ${a.sellerPhone || 'N/D'}</p>
+              </div>
+            ` : `<span class="text-slate-400 italic">Oculto (Requiere Clave)</span>`}
+          </td>
           <td class="p-3">
             <span class="text-[10px] px-2 py-0.5 rounded font-bold ${a.status === 'aprobado' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
               ${a.status || 'pendiente'}
@@ -516,16 +399,24 @@
           </td>
           <td class="p-3 text-right">
             ${a.status === 'pendiente' ? `
-              <button onclick="approveAircraft('${a.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1 rounded text-xs transition-colors">
+              <button onclick="approveAircraft('${a.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1 rounded text-xs">
                 Aprobar
               </button>
-            ` : '<span class="text-xs text-slate-400 font-semibold">Publicado</span>'}
+            ` : '<span class="text-xs text-slate-400">Publicado</span>'}
           </td>
         </tr>
       `).join('');
     }
 
-    // 4. Guardar nueva aeronave desde el formulario a KV
+    function loadAdminWithKey() {
+      const adminKey = prompt("Ingrese la clave de administrador para desbloquear los contactos de los vendedores:");
+      if (adminKey === 'SystemGregory2026') {
+        loadAircrafts('SystemGregory2026');
+      } else if (adminKey) {
+        alert("Clave incorrecta.");
+      }
+    }
+
     async function addNewAircraft(e) {
       e.preventDefault();
 
@@ -537,9 +428,11 @@
         currency: 'USD',
         year: document.getElementById('admin-year').value,
         smoh: document.getElementById('admin-smoh').value,
-        ttaf: "Horas Verificadas",
         location: document.getElementById('admin-location').value,
-        image: document.getElementById('admin-image').value
+        image: document.getElementById('admin-image').value,
+        sellerName: document.getElementById('seller-name').value,
+        sellerPhone: document.getElementById('seller-phone').value,
+        sellerEmail: document.getElementById('seller-email').value
       };
 
       try {
@@ -550,17 +443,16 @@
         });
 
         const result = await res.json();
-        showModal("Enviado a Base de Datos", result.message || "Guardado como pendiente en Cloudflare KV.");
+        showModal("Registro Recibido", result.message || "La aeronave se ha registrado correctamente.");
         e.target.reset();
         loadAircrafts();
       } catch (err) {
-        alert("Error de conexión al guardar en KV.");
+        alert("Error de conexión al guardar.");
       }
     }
 
-    // 5. Aprobar aeronave con Clave de Administrador
     async function approveAircraft(id) {
-      const adminKey = prompt("Ingrese la clave de administrador para aprobar en KV:");
+      const adminKey = prompt("Ingrese la clave de administrador para publicar en el catálogo:");
       if (!adminKey) return;
 
       try {
@@ -572,27 +464,23 @@
 
         const result = await res.json();
         if (result.success) {
-          showModal("Aprobación Exitosa", "La aeronave se ha publicado globalmente.");
+          showModal("Aprobación Exitosa", "Aeronave visible en el catálogo público.");
           loadAircrafts();
         } else {
           alert("Error: " + result.message);
         }
       } catch (err) {
-        alert("Error de comunicación con el backend.");
+        alert("Error de comunicación.");
       }
     }
 
-    // Navegación de Pestañas
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active-nav'));
-
       const activeTab = document.getElementById(`tab-${tabId}`);
       if (activeTab) activeTab.classList.add('active');
-
       const activeNav = document.getElementById(`nav-${tabId}`);
       if (activeNav) activeNav.classList.add('active-nav');
-
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -600,15 +488,9 @@
       document.getElementById('mobile-menu').classList.toggle('hidden');
     }
 
-    function calculateCommission() {
-      const price = parseFloat(document.getElementById('calc-price').value) || 0;
-      const rate = parseFloat(document.getElementById('calc-rate').value) || 0;
-      document.getElementById('calc-result').innerText = '$' + Math.round(price * rate).toLocaleString() + ' USD';
-    }
-
     function handleFormSubmit(e) {
       e.preventDefault();
-      showModal("Consulta Enviada", "Un agente broker de Airjetplan revisará su solicitud.");
+      showModal("Consulta Enviada", "Un agente broker de Airjetplan revisará su mensaje.");
       e.target.reset();
     }
 
@@ -622,11 +504,7 @@
       document.getElementById('modal-notice').classList.add('hidden');
     }
 
-    // Inicializar al cargar
-    document.addEventListener("DOMContentLoaded", () => {
-      loadAircrafts();
-      calculateCommission();
-    });
+    document.addEventListener("DOMContentLoaded", () => loadAircrafts());
   </script>
 </body>
 </html>
