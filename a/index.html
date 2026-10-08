@@ -8,8 +8,8 @@
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- Font Awesome Icons -->
-  <link rel="icon" href="https://raw.githubusercontent.com/systemgregorypc666/Airjetplan/refs/heads/main/a/img/logo.ico" "type=image/x-icon">
+  <!-- Font Awesome Icons & Favicon -->
+  <link rel="icon" href="https://raw.githubusercontent.com/systemgregorypc666/Airjetplan/refs/heads/main/a/img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <!-- Inter Font -->
@@ -93,7 +93,7 @@
             Contacto
           </button>
           <button id="nav-panel" onclick="switchTab('panel')" class="nav-link py-2 px-3 rounded-lg bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-blue-700 transition-all flex items-center gap-2">
-            <i class="fa-solid fa-[#1e40af] fa-sliders text-xs"></i>
+            <i class="fa-solid fa-sliders text-xs text-blue-700"></i>
             Panel Control
           </button>
         </nav>
@@ -125,7 +125,7 @@
   <!-- MAIN CONTENT CONTAINER -->
   <main class="flex-grow">
     
-    <!-- HERO SECTION (ALWAYS PRESENT TOP BANNER) -->
+    <!-- HERO SECTION -->
     <section class="bg-gradient-to-b from-slate-50 via-white to-white py-12 md:py-16 border-b border-slate-100">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         
@@ -212,7 +212,7 @@
         </div>
       </div>
 
-      <!-- Commission & Aircraft Valuation Estimator Tool -->
+      <!-- Commission Calculator Tool -->
       <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl mb-16">
         <div class="max-w-3xl">
           <span class="text-blue-400 font-bold uppercase tracking-wider text-xs">Herramienta de Simulación</span>
@@ -498,7 +498,7 @@
         </div>
       </div>
 
-      <!-- Copyright Notice as Specifically Requested -->
+      <!-- Copyright Notice -->
       <div class="pt-6 text-center text-xs text-slate-400 font-normal">
         <p class="mb-1">@ 2022-2026 Airjetplan. Todos los derechos reservados.</p>
         <p class="text-[10px] text-slate-400">Desarrollado e impulsado por System Gregory PC Technology Services.</p>
@@ -632,9 +632,43 @@
       return '$' + amountUSD.toLocaleString() + ' USD';
     }
 
+    // Create Card HTML Helper
+    function createAircraftCardHTML(a) {
+      return `
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative h-48 bg-slate-100 overflow-hidden">
+              <img src="${a.image}" alt="${a.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80'">
+              <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
+                ${a.category}
+              </span>
+              <span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-black px-2.5 py-1 rounded-md shadow">
+                ${formatMoney(a.priceUSD)}
+              </span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-extrabold text-slate-900 mb-2">${a.title}</h3>
+              <div class="space-y-1.5 text-xs text-slate-500 mb-4">
+                <div class="flex items-center gap-2"><i class="fa-solid fa-calendar text-blue-600 w-4"></i> Año: <span class="font-semibold text-slate-700">${a.year}</span></div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-gauge-high text-blue-600 w-4"></i> Motor (SMOH): <span class="font-semibold text-slate-700">${a.smoh}</span></div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-plane text-blue-600 w-4"></i> Celda (TTAF): <span class="font-semibold text-slate-700">${a.ttaf || 'N/D'}</span></div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-blue-600 w-4"></i> Ubicación: <span class="font-semibold text-slate-700">${a.location}</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <button onclick="requestInfo('${a.title}')" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2.5 px-4 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i> Solicitar Broker
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
     // Render Featured Aircraft Cards in Principal Tab
     function renderFeatured() {
       const container = document.getElementById('featured-aircraft-grid');
+      if (!container) return;
       container.innerHTML = '';
 
       const featured = aircraftData.filter(a => a.featured).slice(0, 3);
@@ -646,13 +680,16 @@
     // Render Full Catalog Grid
     function renderCatalog() {
       const container = document.getElementById('catalog-aircraft-grid');
-      const filter = document.getElementById('catalog-category-filter').value;
+      if (!container) return;
+      
+      const filterSelect = document.getElementById('catalog-category-filter');
+      const filter = filterSelect ? filterSelect.value : 'all';
       container.innerHTML = '';
 
       const filtered = aircraftData.filter(a => filter === 'all' || a.category === filter);
 
       if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-semibold">No hay aeronaves disponibles en esta categoría.</div>`;
+        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">No hay aeronaves disponibles en esta categoría.</div>`;
         return;
       }
 
@@ -661,88 +698,62 @@
       });
     }
 
-    // Generate Aircraft Card Component HTML
-    function createAircraftCardHTML(aircraft) {
-      return `
-        <div class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
-          <div class="relative h-48 bg-slate-100 overflow-hidden">
-            <img src="${aircraft.image}" alt="${aircraft.title}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80'">
-            <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
-              ${aircraft.category}
-            </span>
-            <span class="absolute bottom-3 right-3 bg-blue-700 text-white font-black text-sm px-3 py-1 rounded-lg shadow">
-              ${formatMoney(aircraft.priceUSD)}
-            </span>
-          </div>
-
-          <div class="p-5 flex-grow flex flex-col justify-between">
-            <div>
-              <h3 class="text-base font-bold text-slate-900 mb-2">${aircraft.title}</h3>
-              
-              <div class="space-y-1.5 text-xs text-slate-600 mb-4">
-                <div class="flex items-center gap-2">
-                  <i class="fa-solid fa-gauge-high text-blue-600 w-4"></i>
-                  <span><strong>Motor SMOH:</strong> ${aircraft.smoh}</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <i class="fa-solid fa-plane-flight text-blue-600 w-4"></i>
-                  <span><strong>Año / TTAF:</strong> ${aircraft.year} | ${aircraft.ttaf}</span>
-                </div>
-                <div class="flex items-center gap-2">
-                  <i class="fa-solid fa-location-dot text-blue-600 w-4"></i>
-                  <span><strong>Registro:</strong> ${aircraft.location}</span>
-                </div>
-              </div>
-            </div>
-
-            <a href="https://wa.me/?text=Hola%20Airjetplan,%20estoy%20interesado%20en%20solicitar%20información%20del%20avión%20${encodeURIComponent(aircraft.title)}" target="_blank" rel="noopener noreferrer" class="w-full mt-2 bg-slate-900 hover:bg-blue-700 text-white text-xs font-bold py-2.5 px-4 rounded-xl shadow transition-colors flex items-center justify-center gap-2">
-              <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i>
-              Contactar Broker
-            </a>
-          </div>
-        </div>
-      `;
-    }
-
-    // Filter Catalog from Dropdown
+    // Filter Catalog Trigger
     function filterCatalog() {
       renderCatalog();
     }
 
-    // Execute Search from Hero Bar
+    // Execute Hero Search
     function executeHeroSearch() {
       const type = document.getElementById('hero-type-filter').value;
-      document.getElementById('catalog-category-filter').value = type;
+      const catSelect = document.getElementById('catalog-category-filter');
+      if (catSelect) catSelect.value = type;
+      
       switchTab('productos');
       renderCatalog();
     }
 
-    // Calculate Brokerage Commission Simulator
+    // Calculate Commission Tool
     function calculateCommission() {
       const price = parseFloat(document.getElementById('calc-price').value) || 0;
-      const rate = parseFloat(document.getElementById('calc-rate').value);
-      const result = price * rate;
-      document.getElementById('calc-result').innerText = '$' + Math.round(result).toLocaleString() + ' USD';
+      const rate = parseFloat(document.getElementById('calc-rate').value) || 0;
+      const total = price * rate;
+      
+      document.getElementById('calc-result').innerText = '$' + Math.round(total).toLocaleString() + ' USD';
     }
 
-    // Render Inventory Table in Panel Control
+    // Request Info Action
+    function requestInfo(title) {
+      switchTab('contacto');
+      const text = document.querySelector('#contact-form textarea');
+      if (text) text.value = `Deseo obtener información detallada sobre la aeronave: ${title}`;
+    }
+
+    // Form Submit Handler
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      showModal("Consulta Enviada", "Un agente broker de Airjetplan revisará su solicitud y se pondrá en contacto pronto.");
+      e.target.reset();
+    }
+
+    // Admin: Render Inventory Table
     function renderAdminInventory() {
       const tbody = document.getElementById('admin-inventory-table');
-      const countLabel = document.getElementById('inventory-count');
-      tbody.innerHTML = '';
-      countLabel.innerText = `${aircraftData.length} Unidades`;
+      const countEl = document.getElementById('inventory-count');
+      if (!tbody) return;
 
-      aircraftData.forEach(item => {
+      tbody.innerHTML = '';
+      if (countEl) countEl.innerText = `${aircraftData.length} Unidades`;
+
+      aircraftData.forEach(a => {
         tbody.innerHTML += `
-          <tr class="hover:bg-slate-50">
-            <td class="p-3 font-bold text-slate-900">${item.title}</td>
-            <td class="p-3 uppercase text-[10px] font-bold text-slate-500">${item.category}</td>
-            <td class="p-3 text-blue-700 font-bold">$${item.priceUSD.toLocaleString()}</td>
-            <td class="p-3">
-              <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">Disponible</span>
-            </td>
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="p-3 font-bold text-slate-900">${a.title}</td>
+            <td class="p-3 uppercase text-[10px] font-bold text-blue-700">${a.category}</td>
+            <td class="p-3 font-semibold text-slate-800">$${a.priceUSD.toLocaleString()} USD</td>
+            <td class="p-3"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-bold">Disponible</span></td>
             <td class="p-3 text-right">
-              <button onclick="deleteAircraft(${item.id})" class="text-rose-600 hover:text-rose-800 font-bold p-1">
+              <button onclick="deleteAircraft(${a.id})" class="text-rose-600 hover:text-rose-800 font-bold px-2 py-1 rounded hover:bg-rose-50 transition-colors">
                 <i class="fa-solid fa-trash-can"></i>
               </button>
             </td>
@@ -751,44 +762,38 @@
       });
     }
 
-    // Add New Aircraft dynamically in Admin Panel
+    // Admin: Add New Aircraft
     function addNewAircraft(e) {
       e.preventDefault();
+
       const newAircraft = {
         id: Date.now(),
         title: document.getElementById('admin-title').value,
         category: document.getElementById('admin-category').value,
-        priceUSD: parseFloat(document.getElementById('admin-price').value),
-        year: parseInt(document.getElementById('admin-year').value),
+        priceUSD: parseFloat(document.getElementById('admin-price').value) || 0,
+        year: parseInt(document.getElementById('admin-year').value) || new Date().getFullYear(),
         smoh: document.getElementById('admin-smoh').value,
-        ttaf: "Verificado",
+        ttaf: "Horas Verificadas",
         location: document.getElementById('admin-location').value,
         image: document.getElementById('admin-image').value,
         featured: true
       };
 
       aircraftData.unshift(newAircraft);
-      renderAdminInventory();
       renderCatalog();
       renderFeatured();
+      renderAdminInventory();
 
-      document.getElementById('add-aircraft-form').reset();
-      showModal("Aeronave Publicada", "La aeronave ha sido agregada exitosamente al catálogo en vivo de Airjetplan.");
+      e.target.reset();
+      showModal("Aeronave Publicada", "La nueva aeronave se ha insertado con éxito en el catálogo en vivo.");
     }
 
-    // Delete Aircraft
+    // Admin: Delete Aircraft
     function deleteAircraft(id) {
       aircraftData = aircraftData.filter(a => a.id !== id);
-      renderAdminInventory();
       renderCatalog();
       renderFeatured();
-    }
-
-    // Contact Form Handler
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      showModal("Mensaje Enviado", "Gracias por contactar a Airjetplan. Un asesor broker revisará sus datos y lo contactará a la brevedad.");
-      document.getElementById('contact-form').reset();
+      renderAdminInventory();
     }
 
     // Modal Helpers
@@ -801,133 +806,6 @@
     function closeModal() {
       document.getElementById('modal-notice').classList.add('hidden');
     }
-  <script>
-    const API_URL = '/api';
-
-    // Cargar aeronaves desde la base de datos centralizada
-    async function loadAircrafts() {
-        try {
-            const response = await fetch(API_URL);
-            const data = await response.json();
-            
-            // Filtrar las aprobadas para el público
-            const publicCatalog = data.filter(item => item.status === 'aprobado');
-            renderCatalog(publicCatalog);
-
-            // Cargar en el panel de control (todas las aeronaves para el admin)
-            renderAdminTable(data);
-        } catch (error) {
-            console.error('Error al cargar datos:', error);
-        }
-    }
-
-    // Renderizar tarjetas en el catálogo público
-    function renderCatalog(items) {
-        const catalogContainer = document.getElementById('aircraft-catalog');
-        if (!catalogContainer) return;
-
-        if (items.length === 0) {
-            catalogContainer.innerHTML = `<p class="col-span-3 text-center text-gray-500 py-8">No hay aeronaves disponibles públicamente en este momento.</p>`;
-            return;
-        }
-
-        catalogContainer.innerHTML = items.map(item => `
-            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition">
-                <div class="bg-slate-800 text-white p-4 flex justify-between items-center">
-                    <span class="text-xs font-semibold uppercase tracking-wider bg-blue-600 px-2 py-1 rounded">${item.category}</span>
-                    <span class="text-sm font-bold">${item.currency} $${Number(item.price).toLocaleString()}</span>
-                </div>
-                <div class="p-5">
-                    <h3 class="text-xl font-bold text-slate-800 mb-2">${item.title} (${item.year})</h3>
-                    <ul class="text-sm text-gray-600 space-y-1 mb-4">
-                        <li><strong>TTAF:</strong> ${item.ttaf} hrs</li>
-                        <li><strong>SMOH:</strong> ${item.smoh} hrs</li>
-                        <li><strong>Aviónica:</strong> ${item.avionics}</li>
-                        <li><strong>Ubicación:</strong> ${item.location}</li>
-                    </ul>
-                    <a href="https://wa.me/584161177334?text=Hola,%20estoy%20interesado%20en%20el%20avión%20ID:%20${item.id}%20(${encodeURIComponent(item.title)})" 
-                       target="_blank" 
-                       class="block text-center bg-blue-600 text-white font-medium py-2 rounded hover:bg-blue-700 transition">
-                       Consultar Broker
-                    </a>
-                </div>
-            </div>
-        `).join('');
-    }
-
-    // Renderizar lista en el Panel de Control
-    function renderAdminTable(items) {
-        const adminTable = document.getElementById('admin-aircraft-table');
-        if (!adminTable) return;
-
-        adminTable.innerHTML = items.map(item => `
-            <tr class="border-b">
-                <td class="p-3 text-sm">${item.id}</td>
-                <td class="p-3 text-sm font-bold">${item.title}</td>
-                <td class="p-3 text-sm">${item.category}</td>
-                <td class="p-3 text-sm">$${Number(item.price).toLocaleString()}</td>
-                <td class="p-3 text-sm">
-                    <span class="px-2 py-1 rounded text-xs ${item.status === 'aprobado' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
-                        ${item.status}
-                    </span>
-                </td>
-                <td class="p-3 text-sm">
-                    ${item.status === 'pendiente' ? `
-                        <button onclick="approveAircraft('${item.id}')" class="bg-green-600 text-white px-3 py-1 rounded text-xs font-bold hover:bg-green-700">
-                            Aprobar
-                        </button>
-                    ` : '<span class="text-gray-400">Publicado</span>'}
-                </td>
-            </tr>
-        `).join('');
-    }
-
-    // Guardar nueva aeronave desde el formulario
-    async function submitAircraftForm(event) {
-        event.preventDefault();
-        const payload = {
-            action: 'add',
-            title: document.getElementById('input-title').value,
-            category: document.getElementById('input-category').value,
-            price: document.getElementById('input-price').value,
-            currency: 'USD',
-            year: document.getElementById('input-year').value,
-            ttaf: document.getElementById('input-ttaf').value,
-            smoh: document.getElementById('input-smoh').value,
-            avionics: document.getElementById('input-avionics').value,
-            location: document.getElementById('input-location').value,
-            contact: document.getElementById('input-contact').value
-        };
-
-        const res = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        const result = await res.json();
-        alert(result.message);
-        loadAircrafts();
-    }
-
-    // Aprobar publicación como Administrador
-    async function approveAircraft(id) {
-        const adminKey = prompt("Ingrese la clave de administrador para publicar:");
-        if (!adminKey) return;
-
-        const res = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ action: 'approve', id: id, adminKey: adminKey })
-        });
-
-        const result = await res.json();
-        alert(result.message);
-        loadAircrafts();
-    }
-
-    // Cargar al iniciar la página
-    document.addEventListener('DOMContentLoaded', loadAircrafts);
-</script>
+  </script>
 </body>
 </html>
