@@ -1,335 +1,404 @@
 <!DOCTYPE html>
-<html lang="es" class="h-full bg-white">
+<html lang="es" class="h-full bg-slate-950">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Airjetplan | Brokerage & Aviación Ejecutiva</title>
+  <title>Airjetplan | Elite Aviation Private Club</title>
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" href="https://raw.githubusercontent.com/systemgregorypc666/Airjetplan/refs/heads/main/a/img/logo.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: { sans: ['Inter', 'sans-serif'] },
-          colors: {
-            brand: { 50: '#f0f7ff', 100: '#e0effe', 500: '#0284c7', 600: '#0369a1', 700: '#1d4ed8', 800: '#1e40af', 900: '#0f172a' }
-          }
-        }
-      }
-    }
-  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     body { font-family: 'Inter', sans-serif; }
-    .active-nav { color: #2563eb !important; border-bottom: 2px solid #2563eb; }
-    .tab-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+    .font-serif-elite { font-family: 'Cinzel', serif; }
+    .active-nav { color: #d97706 !important; border-bottom: 2px solid #d97706; }
+    .tab-content { display: none; animation: fadeIn 0.4s ease-in-out; }
     .tab-content.active { display: block; }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
+      from { opacity: 0; transform: translateY(6px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
-<body class="flex flex-col min-h-screen bg-white text-slate-800 antialiased">
+<body class="flex flex-col min-h-screen bg-slate-950 text-slate-100 antialiased">
 
-  <!-- HEADER -->
-  <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
+  <!-- HEADER / NAVBAR -->
+  <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-amber-900/30 shadow-2xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center h-20">
         
+        <!-- Brand Logo -->
         <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('principal')">
-          <div class="w-10 h-10 rounded-xl bg-blue-700 text-white flex items-center justify-center shadow-md">
-            <i class="fa-solid fa-plane-up text-lg"></i>
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-700 text-slate-950 flex items-center justify-center shadow-lg shadow-amber-900/20 font-bold">
+            <i class="fa-solid fa-crown text-lg"></i>
           </div>
           <div>
-            <span class="text-2xl font-extrabold tracking-tight text-blue-700 block leading-none">Airjetplan</span>
-            <span class="text-[10px] tracking-widest uppercase font-semibold text-slate-400 block mt-1">Executive Aircraft Brokerage</span>
+            <span class="text-2xl font-black tracking-wider text-amber-500 font-serif-elite block leading-none">AIRJETPLAN</span>
+            <span class="text-[9px] tracking-[0.25em] uppercase font-semibold text-amber-200/60 block mt-1">PRIVATE ELITE CLUB & BROKERAGE</span>
           </div>
         </div>
 
-        <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold text-slate-600">
-          <button id="nav-principal" onclick="switchTab('principal')" class="nav-link active-nav py-2 hover:text-blue-600">Principal</button>
-          <button id="nav-productos" onclick="switchTab('productos')" class="nav-link py-2 hover:text-blue-600">Aeronaves</button>
-          <button id="nav-tarifas" onclick="switchTab('tarifas')" class="nav-link py-2 hover:text-blue-600 text-amber-600 flex items-center gap-1">
-            <i class="fa-solid fa-tag text-xs"></i> Tarifas & Suscripciones
+        <!-- Desktop Navigation -->
+        <nav class="hidden lg:flex items-center space-x-8 text-xs font-semibold tracking-wider uppercase text-slate-300">
+          <button id="nav-principal" onclick="switchTab('principal')" class="nav-link active-nav py-2 hover:text-amber-500 transition-colors" data-i18n="nav_home">Principal</button>
+          <button id="nav-vip" onclick="switchTab('vip')" class="nav-link py-2 text-amber-400 font-bold hover:text-amber-300 transition-colors flex items-center gap-1.5">
+            <i class="fa-solid fa-crown text-xs"></i> <span data-i18n="nav_vip">VIP Club App</span>
           </button>
-          <button id="nav-contacto" onclick="switchTab('contacto')" class="nav-link py-2 hover:text-blue-600">Contacto</button>
-          <button id="nav-panel" onclick="switchTab('panel')" class="nav-link py-2 px-3 rounded-lg bg-slate-100 text-slate-700 hover:bg-blue-50 hover:text-blue-700 flex items-center gap-2">
-            <i class="fa-solid fa-sliders text-xs text-blue-700"></i> Panel Control
+          <button id="nav-productos" onclick="switchTab('productos')" class="nav-link py-2 hover:text-amber-500 transition-colors" data-i18n="nav_catalog">Catálogo Off-Market</button>
+          <button id="nav-tarifas" onclick="switchTab('tarifas')" class="nav-link py-2 hover:text-amber-500 transition-colors" data-i18n="nav_membership">Membresías</button>
+          <button id="nav-panel" onclick="switchTab('panel')" class="nav-link py-2 px-3 rounded-lg bg-slate-800 border border-amber-900/40 text-amber-400 hover:bg-slate-700 transition-all flex items-center gap-2">
+            <i class="fa-solid fa-sliders text-xs"></i> <span data-i18n="nav_panel">Panel Control</span>
           </button>
         </nav>
 
-        <div class="flex items-center space-x-3">
-          <a href="https://wa.me/584161177334?text=Hola%20Airjetplan,%20deseo%20consultar%20sobre%20una%20aeronave." target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm">
-            <i class="fa-brands fa-whatsapp text-sm"></i> Broker Directo
+        <!-- Right Controls: Language Selector & Direct Access -->
+        <div class="flex items-center space-x-4">
+          <!-- Multilingual Selector -->
+          <div class="relative inline-block text-left">
+            <select id="language-selector" onchange="changeLanguage(this.value)" class="bg-slate-800 text-amber-400 text-xs font-bold rounded-lg px-3 py-2 border border-amber-900/40 focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer">
+              <option value="es">🇪🇸 Español</option>
+              <option value="en">🇺🇸 English</option>
+              <option value="zh">🇨🇳 中文 (Chinese)</option>
+              <option value="de">🇨🇭 Deutsch (Schweiz)</option>
+              <option value="fr">🇫🇷 Français</option>
+              <option value="ko">🇰🇷 한국어 (Korean)</option>
+              <option value="ja">🇯🇵 日本語 (Japanese)</option>
+            </select>
+          </div>
+
+          <a href="https://wa.me/584161177334?text=Hola%20Airjetplan,%20deseo%20solicitar%20acceso%20VIP." target="_blank" class="hidden sm:inline-flex items-center gap-2 bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-bold text-xs px-4 py-2.5 rounded-lg shadow-lg shadow-amber-900/30 transition-all">
+            <i class="fa-solid fa-user-shield text-sm"></i> Concierge VIP
           </a>
-          <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 p-2"><i class="fa-solid fa-bars text-xl"></i></button>
+
+          <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-300 p-2"><i class="fa-solid fa-bars text-xl"></i></button>
         </div>
       </div>
     </div>
 
-    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-100 bg-white px-4 pt-2 pb-4 space-y-2 font-medium text-slate-700">
-      <button onclick="switchTab('principal'); toggleMobileMenu();" class="block w-full text-left py-2 px-3">Principal</button>
-      <button onclick="switchTab('productos'); toggleMobileMenu();" class="block w-full text-left py-2 px-3">Aeronaves</button>
-      <button onclick="switchTab('tarifas'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 text-amber-600 font-bold">Tarifas & Suscripciones</button>
-      <button onclick="switchTab('contacto'); toggleMobileMenu();" class="block w-full text-left py-2 px-3">Contacto</button>
-      <button onclick="switchTab('panel'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 bg-slate-50 text-blue-700">Panel Control</button>
+    <!-- Mobile Navigation -->
+    <div id="mobile-menu" class="hidden lg:hidden border-b border-amber-900/30 bg-slate-900 px-4 pt-2 pb-4 space-y-2 font-medium text-xs text-slate-300">
+      <button onclick="switchTab('principal'); toggleMobileMenu();" class="block w-full text-left py-2 px-3" data-i18n="nav_home">Principal</button>
+      <button onclick="switchTab('vip'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 text-amber-400 font-bold" data-i18n="nav_vip">VIP Club App</button>
+      <button onclick="switchTab('productos'); toggleMobileMenu();" class="block w-full text-left py-2 px-3" data-i18n="nav_catalog">Catálogo Off-Market</button>
+      <button onclick="switchTab('tarifas'); toggleMobileMenu();" class="block w-full text-left py-2 px-3" data-i18n="nav_membership">Membresías</button>
+      <button onclick="switchTab('panel'); toggleMobileMenu();" class="block w-full text-left py-2 px-3 bg-slate-800 text-amber-400" data-i18n="nav_panel">Panel Control</button>
     </div>
   </header>
 
   <main class="flex-grow">
     
     <!-- TAB 1: PRINCIPAL -->
-    <section id="tab-principal" class="tab-content active max-w-7xl mx-auto px-4 py-12">
-      <div class="text-center mb-12">
-        <h1 class="text-4xl sm:text-6xl font-black text-blue-700 mb-4">Airjetplan</h1>
-        <p class="text-slate-600 max-w-2xl mx-auto">Plataforma internacional de corretaje e intermediación para la venta de aeronaves ejecutivas y privadas.</p>
+    <section id="tab-principal" class="tab-content active max-w-7xl mx-auto px-4 py-16">
+      <div class="text-center mb-16">
+        <span class="inline-block px-4 py-1.5 rounded-full bg-amber-950/60 border border-amber-800/40 text-amber-400 text-xs font-bold tracking-widest uppercase mb-6" data-i18n="hero_badge">
+          Ecosistema Privado de Aviación
+        </span>
+        <h1 class="text-4xl sm:text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-amber-400 to-amber-600 font-serif-elite mb-6 leading-tight" data-i18n="hero_title">
+          Airjetplan Elite
+        </h1>
+        <p class="text-slate-400 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed" data-i18n="hero_subtitle">
+          Intermediación internacional de alto nivel, fletamento de jets ejecutivos y acceso privado a inventario Off-Market no publicado en portales convencionales.
+        </p>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8 mb-16">
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
-          <i class="fa-solid fa-handshake text-2xl text-blue-700 mb-3"></i>
-          <h3 class="font-bold text-lg mb-1">Corretaje Transparente</h3>
-          <p class="text-xs text-slate-600">Gestión de comisiones acordadas del 3% al 5% garantizando protección al propietario y comprador.</p>
+        <div class="p-8 rounded-3xl bg-slate-900/60 border border-amber-900/20 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-vault"></i></div>
+          <h3 class="text-lg font-bold text-amber-200 mb-2 font-serif-elite" data-i18n="feature_1_title">Confidencialidad Absoluta</h3>
+          <p class="text-xs text-slate-400 leading-relaxed" data-i18n="feature_1_desc">Protección estricta de la identidad de compradores y propietarios bajo acuerdos de confidencialidad.</p>
         </div>
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
-          <i class="fa-solid fa-shield-halved text-2xl text-blue-700 mb-3"></i>
-          <h3 class="font-bold text-lg mb-1">Privacidad de Contacto</h3>
-          <p class="text-xs text-slate-600">Los datos del propietario se resguardan de forma privada en nuestro servidor administrado.</p>
+        <div class="p-8 rounded-3xl bg-slate-900/60 border border-amber-900/20 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-mobile-screen-button"></i></div>
+          <h3 class="text-lg font-bold text-amber-200 mb-2 font-serif-elite" data-i18n="feature_2_title">Aplicación Móvil VIP</h3>
+          <p class="text-xs text-slate-400 leading-relaxed" data-i18n="feature_2_desc">Plataforma nativa para clientes de élite con alertas directas de oportunidad y concierge 24/7.</p>
         </div>
-        <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100">
-          <i class="fa-solid fa-globe text-2xl text-blue-700 mb-3"></i>
-          <h3 class="font-bold text-lg mb-1">Red Global</h3>
-          <p class="text-xs text-slate-600">Promoción directa para compradores en América Latina, Estados Unidos y Europa.</p>
+        <div class="p-8 rounded-3xl bg-slate-900/60 border border-amber-900/20 backdrop-blur-sm">
+          <div class="w-12 h-12 rounded-2xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-xl mb-4"><i class="fa-solid fa-plane-circle-check"></i></div>
+          <h3 class="text-lg font-bold text-amber-200 mb-2 font-serif-elite" data-i18n="feature_3_title">Inspección de Registro</h3>
+          <p class="text-xs text-slate-400 leading-relaxed" data-i18n="feature_3_desc">Auditoría técnica de libros TTAF/SMOH, matrículas FAA, EASA y certificados de aeronavegabilidad.</p>
         </div>
       </div>
     </section>
 
-    <!-- TAB 2: PRODUCTOS -->
-    <section id="tab-productos" class="tab-content max-w-7xl mx-auto px-4 py-10">
-      <h2 class="text-2xl font-extrabold text-slate-900 mb-6">Catálogo Público de Aeronaves</h2>
+    <!-- TAB 2: VIP CLUB APP (DESCARGA Y MEMBRESÍA) -->
+    <section id="tab-vip" class="tab-content max-w-7xl mx-auto px-4 py-16">
+      <div class="bg-gradient-to-b from-slate-900 via-slate-900 to-amber-950/40 border border-amber-800/40 rounded-3xl p-8 sm:p-14 shadow-2xl relative overflow-hidden">
+        
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span class="px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold tracking-widest uppercase mb-4 inline-block" data-i18n="vip_badge">
+              Acceso Exclusivo por Invitación
+            </span>
+            <h2 class="text-3xl sm:text-5xl font-black text-amber-400 font-serif-elite mb-6 leading-tight" data-i18n="vip_title">
+              Airjetplan Private App
+            </h2>
+            <p class="text-slate-300 text-sm mb-8 leading-relaxed" data-i18n="vip_desc">
+              Diseñada para la red de armadores, compradores y ejecutivos globales. Acceda a inventarios cerrados, negociaciones directas y canal prioritario de fletamento sin intermediarios no autorizados.
+            </p>
+
+            <div class="space-y-4 mb-8">
+              <div class="flex items-center gap-3 text-xs text-slate-200">
+                <i class="fa-solid fa-circle-check text-amber-500 text-base"></i>
+                <span data-i18n="vip_feat_1">Alertas en tiempo real antes de la salida al mercado abierto.</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-slate-200">
+                <i class="fa-solid fa-circle-check text-amber-500 text-base"></i>
+                <span data-i18n="vip_feat_2">Canal directo encriptado con la oficina de corretaje.</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs text-slate-200">
+                <i class="fa-solid fa-circle-check text-amber-500 text-base"></i>
+                <span data-i18n="vip_feat_3">Descarga segura de documentación técnica de aeronaves.</span>
+              </div>
+            </div>
+
+            <!-- Download Button -->
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="https://raw.githubusercontent.com/systemgregorypc666/Airjetplan/main/a/app/airjetplan-vip.apk" target="_blank" class="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-extrabold px-6 py-4 rounded-2xl text-xs flex items-center justify-center gap-3 shadow-xl transition-all">
+                <i class="fa-brands fa-android text-lg"></i>
+                <span data-i18n="vip_download_button">Descargar App VIP (Android APK)</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- VIP Access Request Form -->
+          <div class="bg-slate-950/80 p-8 rounded-3xl border border-amber-900/40">
+            <h3 class="text-xl font-bold text-amber-400 font-serif-elite mb-2" data-i18n="form_vip_title">Solicitar Código de Membresía</h3>
+            <p class="text-xs text-slate-400 mb-6" data-i18n="form_vip_subtitle">Complete los datos para la verificación e ingreso a la red privada.</p>
+
+            <form onsubmit="handleVipRequest(event)" class="space-y-4 text-xs">
+              <div>
+                <label class="block text-slate-400 mb-1" data-i18n="form_name">Nombre Completo / Entidad</label>
+                <input type="text" id="vip-name" required placeholder="Ej. Lord / Cap. Alexander Wright" class="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-amber-500">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1" data-i18n="form_email">Correo Corporativo / Privado</label>
+                <input type="email" id="vip-email" required placeholder="vip@executive.com" class="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-amber-500">
+              </div>
+              <div>
+                <label class="block text-slate-400 mb-1" data-i18n="form_phone">Teléfono / WhatsApp Directo</label>
+                <input type="tel" id="vip-phone" required placeholder="+1 / +41 / +86..." class="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-slate-200 focus:outline-none focus:border-amber-500">
+              </div>
+              <button type="submit" class="w-full bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold py-3.5 rounded-xl transition-all" data-i18n="form_submit">
+                Solicitar Verificación de Perfil
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TAB 3: CATALOGO -->
+    <section id="tab-productos" class="tab-content max-w-7xl mx-auto px-4 py-12">
+      <h2 class="text-2xl font-bold text-amber-400 font-serif-elite mb-6" data-i18n="catalog_title">Catálogo Off-Market & Disponible</h2>
       <div id="catalog-aircraft-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"></div>
     </section>
 
-    <!-- TAB 3: TARIFAS & SUSCRIPCIONES -->
-    <section id="tab-tarifas" class="tab-content max-w-7xl mx-auto px-4 py-12">
+    <!-- TAB 4: TARIFAS & SUSCRIPCIONES -->
+    <section id="tab-tarifas" class="tab-content max-w-7xl mx-auto px-4 py-16">
       <div class="text-center max-w-3xl mx-auto mb-12">
-        <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Planes de Publicación</span>
-        <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Tarifas de Suscripción & Corretaje</h2>
-        <p class="text-slate-500 text-sm mt-2">Publica tu aeronave en nuestra red internacional. Selecciona el plan que mejor se adapte a tus necesidades de venta.</p>
+        <h2 class="text-3xl font-extrabold text-amber-400 font-serif-elite" data-i18n="rates_title">Planes de Publicación & Corretaje</h2>
       </div>
 
       <div class="grid md:grid-cols-3 gap-8">
-        <!-- Plan Básico -->
-        <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-full">Publicación Básica</span>
-            <div class="mt-4 mb-6">
-              <span class="text-4xl font-black text-slate-900">$99</span>
-              <span class="text-slate-500 text-xs">/ 3 meses</span>
-            </div>
-            <ul class="text-xs text-slate-600 space-y-3 mb-6">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Ficha técnica en catálogo global</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Botón de consulta directa a Broker</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Datos de propietario 100% privados</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Comisión de éxito: 5% al vender</li>
-            </ul>
-          </div>
-          <button onclick="switchTab('panel')" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold py-3 rounded-xl text-xs">Publicar Ahora</button>
+        <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800">
+          <span class="text-xs font-bold text-slate-400 uppercase">Standard Listing</span>
+          <div class="my-4"><span class="text-4xl font-black text-slate-100">$99</span><span class="text-xs text-slate-500"> / 3 meses</span></div>
+          <p class="text-xs text-slate-400 mb-6">Publicación general en el catálogo abierto con resguardo de datos de contacto.</p>
         </div>
-
-        <!-- Plan VIP / Destacado -->
-        <div class="bg-blue-900 text-white p-8 rounded-3xl border-2 border-blue-500 shadow-xl flex flex-col justify-between relative overflow-hidden">
-          <div class="absolute -right-8 -top-8 bg-blue-600 text-white text-[10px] font-bold px-8 py-3 rotate-45">RECOMENDADO</div>
-          <div>
-            <span class="text-xs font-bold bg-blue-700 text-blue-200 px-3 py-1 rounded-full">Plan Premium VIP</span>
-            <div class="mt-4 mb-6">
-              <span class="text-4xl font-black text-white">$249</span>
-              <span class="text-blue-200 text-xs">/ 6 meses</span>
-            </div>
-            <ul class="text-xs text-blue-100 space-y-3 mb-6">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Todo lo del Plan Básico</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Posición destacada en Portada</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Promoción directa a red de compradores</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Verificación prioritaria de TTAF/SMOH</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-blue-400"></i> Comisión preferencial: 4% al vender</li>
-            </ul>
-          </div>
-          <button onclick="switchTab('panel')" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl text-xs">Elegir VIP</button>
+        <div class="bg-gradient-to-b from-slate-900 to-amber-950/60 p-8 rounded-3xl border-2 border-amber-500 shadow-2xl relative">
+          <span class="text-xs font-bold text-amber-400 uppercase">VIP Elite Listing</span>
+          <div class="my-4"><span class="text-4xl font-black text-amber-400">$249</span><span class="text-xs text-amber-200"> / 6 meses</span></div>
+          <p class="text-xs text-slate-300 mb-6">Destacado prioritario en la App VIP y envío directo a la red cerrada de inversores.</p>
         </div>
-
-        <!-- Plan Corretaje Exclusivo -->
-        <div class="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm flex flex-col justify-between">
-          <div>
-            <span class="text-xs font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">Contrato Exclusivo</span>
-            <div class="mt-4 mb-6">
-              <span class="text-4xl font-black text-slate-900">$0</span>
-              <span class="text-slate-500 text-xs"> Costo Inicial</span>
-            </div>
-            <ul class="text-xs text-slate-600 space-y-3 mb-6">
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Sin tarifa de publicación inicial</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Agente dedicado a la venta de tu equipo</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Campaña publicitaria internacional</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Exclusividad de corretaje por 180 días</li>
-              <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-600"></i> Comisión de éxito: 3% - 5%</li>
-            </ul>
-          </div>
-          <button onclick="switchTab('contacto')" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs">Solicitar Exclusiva</button>
+        <div class="bg-slate-900 p-8 rounded-3xl border border-slate-800">
+          <span class="text-xs font-bold text-slate-400 uppercase">Exclusive Brokerage</span>
+          <div class="my-4"><span class="text-4xl font-black text-slate-100">$0</span><span class="text-xs text-slate-500"> Inicial</span></div>
+          <p class="text-xs text-slate-400 mb-6">Gestión de venta exclusiva con comisión acordada del 3% al 5% al cierre.</p>
         </div>
       </div>
     </section>
 
-    <!-- TAB 4: CONTACTO -->
-    <section id="tab-contacto" class="tab-content max-w-5xl mx-auto px-4 py-12">
-      <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden grid md:grid-cols-5">
-        <div class="md:col-span-2 bg-blue-700 text-white p-8 flex flex-col justify-between">
-          <div>
-            <h3 class="text-2xl font-bold mb-2">Oficina de Corretaje</h3>
-            <p class="text-blue-100 text-sm mb-6">Atención directa para propietarios y compradores.</p>
-            <div class="space-y-3 text-xs">
-              <p><i class="fa-solid fa-location-dot mr-2"></i> San Cristóbal, Táchira, Venezuela</p>
-              <p><i class="fa-solid fa-phone mr-2"></i> +58 416 1177334</p>
-              <p><i class="fa-solid fa-envelope mr-2"></i> contacto@airjetplan.com</p>
-            </div>
-          </div>
-        </div>
-        <div class="md:col-span-3 p-8">
-          <form onsubmit="handleFormSubmit(event)" class="space-y-4 text-xs">
-            <input type="text" required placeholder="Nombre Completo" class="w-full bg-slate-50 border p-3 rounded-lg">
-            <input type="email" required placeholder="Correo Electrónico" class="w-full bg-slate-50 border p-3 rounded-lg">
-            <textarea rows="4" required placeholder="Escriba su consulta o detalle de la aeronave..." class="w-full bg-slate-50 border p-3 rounded-lg"></textarea>
-            <button type="submit" class="w-full bg-blue-700 text-white font-bold py-3 rounded-lg">Enviar Mensaje</button>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- TAB 5: PANEL CONTROL (ADMIN / VENDEDOR) -->
-    <section id="tab-panel" class="tab-content max-w-7xl mx-auto px-4 py-10">
-      <div class="flex items-center justify-between mb-8">
-        <div>
-          <span class="text-xs font-bold text-blue-700 uppercase">Gestión de Publicaciones</span>
-          <h2 class="text-2xl font-extrabold text-slate-900">Registro & Administración KV</h2>
-        </div>
+    <!-- TAB 5: PANEL CONTROL -->
+    <section id="tab-panel" class="tab-content max-w-7xl mx-auto px-4 py-12">
+      <div class="flex justify-between items-center mb-8">
+        <h2 class="text-2xl font-bold text-amber-400 font-serif-elite">Panel Administrativo Global</h2>
+        <button onclick="loadAdminWithKey()" class="text-xs bg-slate-800 hover:bg-slate-700 text-amber-400 border border-amber-900/40 px-4 py-2 rounded-xl font-bold">
+          🔑 Desbloquear Contactos Privados (SystemGregory2026)
+        </button>
       </div>
 
       <div class="grid lg:grid-cols-3 gap-8">
-        <!-- Formulario con campos de Propietario -->
-        <div class="lg:col-span-1 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
-            <i class="fa-solid fa-plus-circle text-blue-700"></i> Publicar Nueva Aeronave
-          </h3>
-
-          <form id="add-aircraft-form" onsubmit="addNewAircraft(event)" class="space-y-3 text-xs">
-            <div>
-              <label class="block font-semibold mb-1">Modelo / Título</label>
-              <input type="text" id="admin-title" required placeholder="Ej. Cessna 208 Caravan" class="w-full bg-slate-50 border rounded-lg p-2.5">
+        <div class="lg:col-span-1 bg-slate-900 p-6 rounded-2xl border border-slate-800 text-xs space-y-3">
+          <h3 class="font-bold text-slate-200 text-sm mb-2">Registrar Aeronave en KV</h3>
+          <form id="add-aircraft-form" onsubmit="addNewAircraft(event)" class="space-y-3">
+            <input type="text" id="admin-title" required placeholder="Modelo / Título" class="w-full bg-slate-950 border border-slate-800 p-2.5 rounded-lg">
+            <select id="admin-category" class="w-full bg-slate-950 border border-slate-800 p-2.5 rounded-lg">
+              <option value="monomotor">Monomotor</option>
+              <option value="turboprop">Turbohélice</option>
+              <option value="jet">Jet Ejecutivos</option>
+            </select>
+            <input type="number" id="admin-price" required placeholder="Precio ($ USD)" class="w-full bg-slate-950 border border-slate-800 p-2.5 rounded-lg">
+            <input type="number" id="admin-year" required placeholder="Año" class="w-full bg-slate-950 border border-slate-800 p-2.5 rounded-lg">
+            <input type="text" id="admin-smoh" required placeholder="Motor (SMOH)" class="w-full bg-slate-950 border border-slate-800 p-2.5 rounded-lg">
+            <input type="text" id="admin-location" required placeholder="Ubicación / Matrícula" class="w-full bg-slate-950 border border-slate-800 p-2.5 rounded-lg">
+            <input type="url" id="admin-image" placeholder="URL Imagen" class="w-full bg-slate-950 border border-slate-800 p-2.5 rounded-lg">
+            
+            <div class="pt-2 border-t border-slate-800 space-y-2">
+              <span class="block text-amber-500 font-bold">🔒 Datos Privados Propietario</span>
+              <input type="text" id="seller-name" required placeholder="Nombre Vendedor" class="w-full bg-slate-950 border border-slate-800 p-2 rounded">
+              <input type="tel" id="seller-phone" required placeholder="WhatsApp / Teléfono" class="w-full bg-slate-950 border border-slate-800 p-2 rounded">
+              <input type="email" id="seller-email" placeholder="Correo Vendedor" class="w-full bg-slate-950 border border-slate-800 p-2 rounded">
             </div>
 
-            <div class="grid grid-cols-2 gap-2">
-              <div>
-                <label class="block font-semibold mb-1">Categoría</label>
-                <select id="admin-category" class="w-full bg-slate-50 border rounded-lg p-2.5">
-                  <option value="monomotor">Monomotor</option>
-                  <option value="turboprop">Turbohélice</option>
-                  <option value="jet">Jet Ejecutivos</option>
-                </select>
-              </div>
-              <div>
-                <label class="block font-semibold mb-1">Precio ($ USD)</label>
-                <input type="number" id="admin-price" required placeholder="250000" class="w-full bg-slate-50 border rounded-lg p-2.5">
-              </div>
-            </div>
-
-            <div class="grid grid-cols-2 gap-2">
-              <div>
-                <label class="block font-semibold mb-1">Año</label>
-                <input type="number" id="admin-year" required placeholder="1995" class="w-full bg-slate-50 border rounded-lg p-2.5">
-              </div>
-              <div>
-                <label class="block font-semibold mb-1">Motor (SMOH)</label>
-                <input type="text" id="admin-smoh" required placeholder="300 hrs" class="w-full bg-slate-50 border rounded-lg p-2.5">
-              </div>
-            </div>
-
-            <div>
-              <label class="block font-semibold mb-1">Ubicación / Matrícula</label>
-              <input type="text" id="admin-location" required placeholder="Venezuela / Matrícula YV" class="w-full bg-slate-50 border rounded-lg p-2.5">
-            </div>
-
-            <div>
-              <label class="block font-semibold mb-1">URL Fotografía</label>
-              <input type="url" id="admin-image" placeholder="https://..." class="w-full bg-slate-50 border rounded-lg p-2.5">
-            </div>
-
-            <!-- Sección Privada del Propietario -->
-            <div class="pt-3 border-t border-slate-200 mt-2 bg-slate-50 p-3 rounded-lg border">
-              <span class="block font-bold text-slate-800 text-[11px] mb-2 text-blue-700">🔒 Datos Privados del Propietario (No públicos)</span>
-              <div class="space-y-2">
-                <input type="text" id="seller-name" required placeholder="Nombre Propietario / Vendedor" class="w-full bg-white border rounded p-2">
-                <input type="tel" id="seller-phone" required placeholder="WhatsApp / Teléfono Contacto" class="w-full bg-white border rounded p-2">
-                <input type="email" id="seller-email" placeholder="Correo Electrónico Vendedor" class="w-full bg-white border rounded p-2">
-              </div>
-            </div>
-
-            <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 rounded-lg shadow">
-              Enviar para Revisión KV
-            </button>
+            <button type="submit" class="w-full bg-amber-600 text-slate-950 font-bold py-2.5 rounded-lg">Guardar en Base de Datos KV</button>
           </form>
         </div>
 
-        <!-- Tabla de Gestión Admin con Datos Privados -->
-        <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-          <div class="flex justify-between items-center mb-4">
-            <h3 class="text-base font-bold text-slate-900">Listado General en Servidor KV</h3>
-            <button onclick="loadAdminWithKey()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold px-3 py-1.5 rounded-lg">
-              🔑 Ver Datos Privados Vendedor
-            </button>
-          </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-              <thead class="bg-slate-50 text-slate-500 uppercase font-bold border-b">
-                <tr>
-                  <th class="p-3">Aeronave</th>
-                  <th class="p-3">Precio</th>
-                  <th class="p-3">Contacto Vendedor (Privado)</th>
-                  <th class="p-3">Estado</th>
-                  <th class="p-3 text-right">Acción</th>
-                </tr>
-              </thead>
-              <tbody id="admin-inventory-table" class="divide-y divide-slate-100 font-medium"></tbody>
-            </table>
-          </div>
+        <div class="lg:col-span-2 bg-slate-900 p-6 rounded-2xl border border-slate-800 overflow-x-auto text-xs">
+          <table class="w-full text-left">
+            <thead class="bg-slate-950 text-slate-400 uppercase border-b border-slate-800">
+              <tr>
+                <th class="p-3">Aeronave</th>
+                <th class="p-3">Precio</th>
+                <th class="p-3">Contacto Privado</th>
+                <th class="p-3">Estado</th>
+                <th class="p-3 text-right">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="admin-inventory-table" class="divide-y divide-slate-800"></tbody>
+          </table>
         </div>
       </div>
     </section>
 
   </main>
 
-  <footer class="bg-slate-900 text-white border-t border-slate-800 mt-auto py-8 text-center text-xs text-slate-400">
-    <p>@ 2022-2026 Airjetplan. Todos los derechos reservados.</p>
-    <p class="text-[10px] text-slate-500 mt-1">Desarrollado e impulsado por System Gregory PC Technology Services.</p>
+  <footer class="bg-slate-950 border-t border-slate-900 py-8 text-center text-xs text-slate-500">
+    <p>@ 2022-2026 Airjetplan. All rights reserved.</p>
+    <p class="text-[10px] text-slate-600 mt-1">Engineered by System Gregory PC Technology Services.</p>
   </footer>
 
   <!-- Modal Notification -->
-  <div id="modal-notice" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl">
-      <h3 id="modal-title" class="text-lg font-bold text-slate-900 mb-2">Notificación</h3>
-      <p id="modal-msg" class="text-xs text-slate-600 mb-6"></p>
-      <button onclick="closeModal()" class="w-full bg-blue-700 text-white font-bold py-2 rounded-lg text-xs">Aceptar</button>
+  <div id="modal-notice" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-amber-900/40 rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl">
+      <h3 id="modal-title" class="text-lg font-bold text-amber-400 font-serif-elite mb-2">Airjetplan Notice</h3>
+      <p id="modal-msg" class="text-xs text-slate-300 mb-6"></p>
+      <button onclick="closeModal()" class="w-full bg-amber-600 text-slate-950 font-bold py-2 rounded-lg text-xs">OK</button>
     </div>
   </div>
 
+  <!-- MULTILINGUAL ENGINE & BACKEND JS -->
   <script>
     const API_URL = '/api';
 
+    // MULTILINGUAL DICTIONARY
+    const i18nData = {
+      es: {
+        nav_home: "Principal", nav_vip: "VIP Club App", nav_catalog: "Catálogo Off-Market", nav_membership: "Membresías", nav_panel: "Panel Control",
+        hero_badge: "Ecosistema Privado de Aviación", hero_title: "Airjetplan Elite", hero_subtitle: "Intermediación internacional de alto nivel, fletamento de jets ejecutivos y acceso privado a inventario Off-Market no publicado en portales convencionales.",
+        feature_1_title: "Confidencialidad Absoluta", feature_1_desc: "Protección estricta de la identidad de compradores y propietarios bajo acuerdos de confidencialidad.",
+        feature_2_title: "Aplicación Móvil VIP", feature_2_desc: "Plataforma nativa para clientes de élite con alertas directas de oportunidad y concierge 24/7.",
+        feature_3_title: "Inspección de Registro", feature_3_desc: "Auditoría técnica de libros TTAF/SMOH, matrículas FAA, EASA y certificados de aeronavegabilidad.",
+        vip_badge: "Acceso Exclusivo por Invitación", vip_title: "Airjetplan Private App", vip_desc: "Diseñada para la red de armadores, compradores y ejecutivos globales. Acceda a inventarios cerrados y canal prioritario sin intermediarios no autorizados.",
+        vip_feat_1: "Alertas en tiempo real antes de la salida al mercado abierto.", vip_feat_2: "Canal directo encriptado con la oficina de corretaje.", vip_feat_3: "Descarga segura de documentación técnica de aeronaves.",
+        vip_download_button: "Descargar App VIP (Android APK)", form_vip_title: "Solicitar Código de Membresía", form_vip_subtitle: "Complete los datos para la verificación e ingreso a la red privada.",
+        form_name: "Nombre Completo / Entidad", form_email: "Correo Corporativo / Privado", form_phone: "Teléfono / WhatsApp Directo", form_submit: "Solicitar Verificación de Perfil",
+        catalog_title: "Catálogo Off-Market & Disponible", rates_title: "Planes de Publicación & Corretaje"
+      },
+      en: {
+        nav_home: "Home", nav_vip: "VIP Club App", nav_catalog: "Off-Market Catalog", nav_membership: "Memberships", nav_panel: "Control Panel",
+        hero_badge: "Private Aviation Ecosystem", hero_title: "Airjetplan Elite", hero_subtitle: "High-level international brokerage, executive jet charter, and private access to Off-Market inventory not listed on public portals.",
+        feature_1_title: "Absolute Confidentiality", feature_1_desc: "Strict protection of buyer and owner identities under non-disclosure agreements.",
+        feature_2_title: "VIP Mobile App", feature_2_desc: "Native platform for elite clients featuring instant opportunity alerts and 24/7 concierge.",
+        feature_3_title: "Registry Inspection", feature_3_desc: "Technical audit of TTAF/SMOH logbooks, FAA, EASA registrations, and airworthiness certificates.",
+        vip_badge: "Exclusive Access by Invitation", vip_title: "Airjetplan Private App", vip_desc: "Engineered for global aircraft owners, buyers, and executives. Access closed inventories and priority channels without unauthorized middlemen.",
+        vip_feat_1: "Real-time alerts prior to open market release.", vip_feat_2: "Direct encrypted channel with the brokerage office.", vip_feat_3: "Secure technical documentation downloads.",
+        vip_download_button: "Download VIP App (Android APK)", form_vip_title: "Request Membership Code", form_vip_subtitle: "Complete details for verification and private network admission.",
+        form_name: "Full Name / Entity", form_email: "Corporate / Private Email", form_phone: "Direct Phone / WhatsApp", form_submit: "Request Profile Verification",
+        catalog_title: "Off-Market & Available Inventory", rates_title: "Listing & Brokerage Plans"
+      },
+      zh: {
+        nav_home: "首页", nav_vip: "VIP 专属 App", nav_catalog: "非公开机队目录", nav_membership: "会籍方案", nav_panel: "管理面板",
+        hero_badge: "私人航空专属生态系统", hero_title: "Airjetplan 尊尚会", hero_subtitle: "高端国际公务机经纪、行政专机包机，以及未在公共平台公开的内部非公开机队资源。",
+        feature_1_title: "绝对保密承诺", feature_1_desc: "在严格的保密协议下，全力保护买家与业主的真实身份。",
+        feature_2_title: "VIP 移动应用程序", feature_2_desc: "为精英客户打造的专属平台，提供即时交易提醒与24/7全天候管家服务。",
+        feature_3_title: "技术与履历审查", feature_3_desc: "严谨审查 TTAF/SMOH 飞行日志、FAA/EASA 注册及适航认证。",
+        vip_badge: "受邀客户专属通道", vip_title: "Airjetplan 尊享 App", vip_desc: "专为全球公务机业主、买家及高管设计。直通内部封闭机队及优先通道。",
+        vip_feat_1: "公开市场发布前的实时优先提醒。", vip_feat_2: "与经纪办公室的直接加密沟通通道。", vip_feat_3: "安全下载技术文档与机队档案。",
+        vip_download_button: "下载 VIP App (Android APK)", form_vip_title: "申请会籍验证码", form_vip_subtitle: "请填写资料以完成身份验证并加入私人网络。",
+        form_name: "姓名 / 机构名称", form_email: "企业 / 私人邮箱", form_phone: "直接电话 / 微信 / WhatsApp", form_submit: "提交身份验证申请",
+        catalog_title: "非公开及在售机队", rates_title: "发布与经纪服务方案"
+      },
+      de: {
+        nav_home: "Startseite", nav_vip: "VIP Club App", nav_catalog: "Off-Market Katalog", nav_membership: "Mitgliedschaften", nav_panel: "Kontrollpanel",
+        hero_badge: "Privates Luftfahrt-Ökosystem", hero_title: "Airjetplan Elite", hero_subtitle: "Hochrangige internationale Vermittlung, Executive Jet Charter und privater Zugang zu Nicht-Öffentlichem Inventar.",
+        feature_1_title: "Absolute Vertraulichkeit", feature_1_desc: "Strikter Schutz der Identität von Käufern und Eigentümern unter Geheimhaltungsvereinbarungen.",
+        feature_2_title: "VIP Mobile App", feature_2_desc: "Exklusive Plattform für Elite-Kunden mit Echtzeit-Benachrichtigungen und 24/7 Concierge.",
+        feature_3_title: "Registerprüfung", feature_3_desc: "Technische Auditierung von TTAF/SMOH Logbüchern sowie FAA- und EASA-Zulassungen.",
+        vip_badge: "Exklusiver Zugang auf Einladung", vip_title: "Airjetplan Private App", vip_desc: "Entwickelt für globale Flugzeugeigentümer und Investoren. Zugang zu geschlossenen Beständen.",
+        vip_feat_1: "Echtzeit-Meldungen vor der Veröffentlichung am Markt.", vip_feat_2: "Direkter verschlüsselter Kanal zum Broker-Office.", vip_feat_3: "Sicherer Download technischer Flugzeugdokumente.",
+        vip_download_button: "VIP App Herunterladen (Android APK)", form_vip_title: "Mitglieds-Code Anfordern", form_vip_subtitle: "Angaben zur Verifizierung und Aufnahme in das private Netzwerk.",
+        form_name: "Vollständiger Name / Entity", form_email: "Geschäftliche / Private E-Mail", form_phone: "Direkttelefon / WhatsApp", form_submit: "Profilverifizierung Anfordern",
+        catalog_title: "Off-Market & Verfügbares Inventar", rates_title: "Listing- & Vermittlungspläne"
+      },
+      fr: {
+        nav_home: "Accueil", nav_vip: "App VIP Club", nav_catalog: "Catalogue Off-Market", nav_membership: "Adhésions", nav_panel: "Panneau de Contrôle",
+        hero_badge: "Écosystème d'Aviation Privée", hero_title: "Airjetplan Élite", hero_subtitle: "Courtage international de haut niveau, affrètement de jets d'affaires et accès privé au catalogue Off-Market.",
+        feature_1_title: "Confidentialité Absolue", feature_1_desc: "Protection stricte de l'identité des acheteurs et propriétaires sous accords de confidentialité.",
+        feature_2_title: "Application Mobile VIP", feature_2_desc: "Plateforme dédiée aux clients d'élite avec alertes d'opportunité et conciergerie 24/7.",
+        feature_3_title: "Inspection des Registres", feature_3_desc: "Audit technique des carnets TTAF/SMOH, immatriculations FAA, EASA et certificats de navigabilité.",
+        vip_badge: "Accès Exclusif sur Invitation", vip_title: "Airjetplan App Privée", vip_desc: "Conçue pour les propriétaires et décideurs mondiaux. Accédez au catalogue privé sans intermédiaires.",
+        vip_feat_1: "Alertes en temps réel avant la sortie sur le marché public.", vip_feat_2: "Canal direct chiffré avec le bureau de courtage.", vip_feat_3: "Téléchargement sécurisé de la documentation technique.",
+        vip_download_button: "Télécharger l'App VIP (Android APK)", form_vip_title: "Demander un Code d'Accès", form_vip_subtitle: "Complétez les informations pour la vérification du profil.",
+        form_name: "Nom Complet / Entité", form_email: "E-mail Professionnel / Privé", form_phone: "Téléphone Direct / WhatsApp", form_submit: "Demander la Vérification du Profil",
+        catalog_title: "Inventaire Off-Market & Disponible", rates_title: "Tarifs de Courtage & Publication"
+      },
+      ko: {
+        nav_home: "메인", nav_vip: "VIP 클럽 App", nav_catalog: "비공개 매물 카탈로그", nav_membership: "멤버십", nav_panel: "제어판",
+        hero_badge: "프라이빗 항공 생태계", hero_title: "Airjetplan 엘리트", hero_subtitle: "고급 국제 중개, 비즈니스 제트 전세기 및 일반 포털에 공개되지 않는 프라이빗 매물 접근 권한.",
+        feature_1_title: "철저한 비밀 유지", feature_1_desc: "비밀유지계약(NDA)에 따른 구매자 및 소유자의 엄격한 신원 보호.",
+        feature_2_title: "VIP 모바일 앱", feature_2_desc: "실시간 기회 알림 및 24/7 컨시어지 서비스를 제공하는 엘리트 전용 앱.",
+        feature_3_title: "기록 및 기체 점검", feature_3_desc: "TTAF/SMOH 기록부, FAA 및 EASA 등록부 및 감항 증명서 감사.",
+        vip_badge: "초대 전용 프라이빗 접근", vip_title: "Airjetplan 프라이빗 App", vip_desc: "글로벌 항공기 소유자 및 투자자를 위한 앱. 승인되지 않은 중개인 없이 프라이빗 매물에 접근하세요.",
+        vip_feat_1: "공개 시장 출시 전 실시간 알림.", vip_feat_2: "중개 오피스와의 직접 암호화 채널.", vip_feat_3: "항공기 기술 문서의 안전한 다운로드.",
+        vip_download_button: "VIP 앱 다운로드 (Android APK)", form_vip_title: "멤버십 코드 요청", form_vip_subtitle: "프라이빗 네트워크 승인을 위해 정보를 입력하세요.",
+        form_name: "성함 / 법인명", form_email: "회사 / 개인 이메일", form_phone: "직통 전화 / WhatsApp", form_submit: "프로필 검증 요청",
+        catalog_title: "비공개 및 보유 매물", rates_title: "등록 및 중개 플랜"
+      },
+      ja: {
+        nav_home: "메인", nav_vip: "VIP クラブ App", nav_catalog: "非公開機体カタログ", nav_membership: "メンバーシップ", nav_panel: "管理パネル",
+        hero_badge: "プライベート航空エコシステム", hero_title: "Airjetplan エリート", hero_subtitle: "ハイレベルな国際仲介、ビジネスジェットチャーター、および一般市場に出ない非公開機体へのアクセス。",
+        feature_1_title: "完全な機密保持", feature_1_desc: "秘密保持契約に基づき、買主および所有者の身元を厳重に protection します。",
+        feature_2_title: "VIP モバイルアプリ", feature_2_desc: "リアルタイムの通知機能と24時間365日対応のコンシェルジュを備えた専用アプリ。",
+        feature_3_title: "技術・ログ監査", feature_3_desc: "TTAF/SMOH ログブック、FAA/EASA 登録、耐空性証明書の技術監査を実施。",
+        vip_badge: "完全招待制アクセス", vip_title: "Airjetplan プライベート App", vip_desc: "世界の航空機オーナーや投資家のために設計。非公開機体へダイレクトアクセス。",
+        vip_feat_1: "一般市場公開前のリアルタイム通知。", vip_feat_2: "ブロー커オフィスとの暗号化された直接通信。", vip_feat_3: "機体技術ドキュメントの安全なダウンロード。",
+        vip_download_button: "VIP アプリをダウンロード (Android APK)", form_vip_title: "メンバーシップコードの申請", form_vip_subtitle: "非公開ネットワーク審査のため詳細をご記入ください。",
+        form_name: "お名前 / 法人名", form_email: " Eメール", form_phone: "直通電話 / WhatsApp", form_submit: "プロフィール審査を申請",
+        catalog_title: "非公開および取扱機体", rates_title: "掲載および仲介プラン"
+      }
+    };
+
+    function changeLanguage(lang) {
+      const dict = i18nData[lang] || i18nData['es'];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key]) {
+          if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+            el.placeholder = dict[key];
+          } else {
+            el.innerText = dict[key];
+          }
+        }
+      });
+    }
+
+    // BACKEND INTEGRATION (Cloudflare KV)
     async function loadAircrafts(adminKey = '') {
       try {
         const fetchUrl = adminKey ? `${API_URL}?adminKey=${encodeURIComponent(adminKey)}` : API_URL;
@@ -341,7 +410,7 @@
         renderPublicCatalog(publicCatalog);
         renderAdminTable(data, !!adminKey);
       } catch (error) {
-        console.error('Error al conectar con la API KV:', error);
+        console.error('API Error:', error);
       }
     }
 
@@ -350,26 +419,26 @@
       if (!container) return;
 
       if (items.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">No hay aeronaves aprobadas disponibles públicamente.</div>`;
+        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500">No Off-Market aircraft currently listed.</div>`;
         return;
       }
 
       container.innerHTML = items.map(a => `
-        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm flex flex-col justify-between">
+        <div class="bg-slate-900 rounded-3xl border border-slate-800 overflow-hidden flex flex-col justify-between">
           <div>
-            <div class="relative h-48 bg-slate-100 overflow-hidden">
-              <img src="${a.image || 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80'}" class="w-full h-full object-cover">
-              <span class="absolute top-3 left-3 bg-slate-900/80 text-white text-[10px] font-bold px-2 py-1 rounded">${a.category}</span>
-              <span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-black px-2.5 py-1 rounded">$${Number(a.price).toLocaleString()} USD</span>
+            <div class="relative h-48 bg-slate-950">
+              <img src="${a.image || 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80'}" class="w-full h-full object-cover opacity-80">
+              <span class="absolute top-3 left-3 bg-slate-950/90 text-amber-400 text-[10px] font-bold px-2 py-1 rounded uppercase">${a.category}</span>
+              <span class="absolute top-3 right-3 bg-amber-600 text-slate-950 text-xs font-black px-2.5 py-1 rounded">$${Number(a.price).toLocaleString()} USD</span>
             </div>
             <div class="p-5">
-              <h3 class="text-lg font-extrabold mb-1">${a.title} (${a.year || 'N/D'})</h3>
-              <p class="text-xs text-slate-500 mb-3">SMOH: ${a.smoh || 'N/D'} | Ubicación: ${a.location || 'N/D'}</p>
+              <h3 class="text-lg font-bold text-amber-200 font-serif-elite mb-1">${a.title} (${a.year || 'N/D'})</h3>
+              <p class="text-xs text-slate-400">SMOH: ${a.smoh || 'N/D'} | Loc: ${a.location || 'N/D'}</p>
             </div>
           </div>
           <div class="p-5 pt-0">
-            <a href="https://wa.me/584161177334?text=Hola,%20deseo%20información%20de%20la%20aeronave:%20${encodeURIComponent(a.title)}" target="_blank" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors">
-              <i class="fa-solid fa-paper-plane"></i> Consultar Broker Directo
+            <a href="https://wa.me/584161177334?text=Hola,%20solicito%20información%20VIP%20de:%20${encodeURIComponent(a.title)}" target="_blank" class="w-full bg-slate-800 hover:bg-amber-600 hover:text-slate-950 text-amber-400 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 transition-all">
+              <i class="fa-solid fa-crown"></i> Contact Concierge Broker
             </a>
           </div>
         </div>
@@ -381,39 +450,39 @@
       if (!tbody) return;
 
       tbody.innerHTML = items.map(a => `
-        <tr class="hover:bg-slate-50">
-          <td class="p-3 font-bold">${a.title}</td>
-          <td class="p-3 font-semibold text-blue-700">$${Number(a.price).toLocaleString()} USD</td>
+        <tr class="hover:bg-slate-800/50">
+          <td class="p-3 font-bold text-slate-200">${a.title}</td>
+          <td class="p-3 font-semibold text-amber-400">$${Number(a.price).toLocaleString()} USD</td>
           <td class="p-3">
             ${isUnlocked ? `
-              <div class="text-[11px] bg-slate-100 p-1.5 rounded border">
-                <p><strong>Propietario:</strong> ${a.sellerName || 'N/D'}</p>
-                <p><strong>Tel/WA:</strong> ${a.sellerPhone || 'N/D'}</p>
+              <div class="text-[11px] bg-slate-950 p-2 rounded border border-slate-800">
+                <p class="text-amber-300"><strong>Owner:</strong> ${a.sellerName || 'N/D'}</p>
+                <p class="text-slate-300"><strong>Tel/WA:</strong> ${a.sellerPhone || 'N/D'}</p>
               </div>
-            ` : `<span class="text-slate-400 italic">Oculto (Requiere Clave)</span>`}
+            ` : `<span class="text-slate-500 italic">Locked (Key Required)</span>`}
           </td>
           <td class="p-3">
-            <span class="text-[10px] px-2 py-0.5 rounded font-bold ${a.status === 'aprobado' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
-              ${a.status || 'pendiente'}
+            <span class="text-[10px] px-2 py-0.5 rounded font-bold ${a.status === 'aprobado' ? 'bg-emerald-950 text-emerald-400' : 'bg-amber-950 text-amber-400'}">
+              ${a.status || 'pending'}
             </span>
           </td>
           <td class="p-3 text-right">
             ${a.status === 'pendiente' ? `
-              <button onclick="approveAircraft('${a.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1 rounded text-xs">
-                Aprobar
+              <button onclick="approveAircraft('${a.id}')" class="bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold px-3 py-1 rounded text-xs">
+                Approve
               </button>
-            ` : '<span class="text-xs text-slate-400">Publicado</span>'}
+            ` : '<span class="text-xs text-slate-500">Live</span>'}
           </td>
         </tr>
       `).join('');
     }
 
     function loadAdminWithKey() {
-      const adminKey = prompt("Ingrese la clave de administrador para desbloquear los contactos de los vendedores:");
+      const adminKey = prompt("Enter Master Key for Private Owner Access:");
       if (adminKey === 'SystemGregory2026') {
         loadAircrafts('SystemGregory2026');
       } else if (adminKey) {
-        alert("Clave incorrecta.");
+        alert("Invalid Master Key.");
       }
     }
 
@@ -443,16 +512,16 @@
         });
 
         const result = await res.json();
-        showModal("Registro Recibido", result.message || "La aeronave se ha registrado correctamente.");
+        showModal("KV Database Updated", result.message || "Record successfully added.");
         e.target.reset();
         loadAircrafts();
       } catch (err) {
-        alert("Error de conexión al guardar.");
+        alert("Server communication error.");
       }
     }
 
     async function approveAircraft(id) {
-      const adminKey = prompt("Ingrese la clave de administrador para publicar en el catálogo:");
+      const adminKey = prompt("Enter Master Key to approve public listing:");
       if (!adminKey) return;
 
       try {
@@ -464,14 +533,22 @@
 
         const result = await res.json();
         if (result.success) {
-          showModal("Aprobación Exitosa", "Aeronave visible en el catálogo público.");
+          showModal("Listing Approved", "Aircraft published to off-market catalog.");
           loadAircrafts();
         } else {
-          alert("Error: " + result.message);
+          alert("Access Denied: " + result.message);
         }
       } catch (err) {
-        alert("Error de comunicación.");
+        alert("Approval failed.");
       }
+    }
+
+    function handleVipRequest(e) {
+      e.preventDefault();
+      const name = document.getElementById('vip-name').value;
+      const phone = document.getElementById('vip-phone').value;
+      showModal("VIP Membership Request Received", `Thank you, ${name}. Our concierge office will verify your credentials and issue your access code.`);
+      e.target.reset();
     }
 
     function switchTab(tabId) {
@@ -486,12 +563,6 @@
 
     function toggleMobileMenu() {
       document.getElementById('mobile-menu').classList.toggle('hidden');
-    }
-
-    function handleFormSubmit(e) {
-      e.preventDefault();
-      showModal("Consulta Enviada", "Un agente broker de Airjetplan revisará su mensaje.");
-      e.target.reset();
     }
 
     function showModal(title, msg) {
