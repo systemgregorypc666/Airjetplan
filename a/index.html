@@ -801,6 +801,133 @@
     function closeModal() {
       document.getElementById('modal-notice').classList.add('hidden');
     }
-  </script>
+  <script>
+    const API_URL = '/api';
+
+    // Cargar aeronaves desde la base de datos centralizada
+    async function loadAircrafts() {
+        try {
+            const response = await fetch(API_URL);
+            const data = await response.json();
+            
+            // Filtrar las aprobadas para el público
+            const publicCatalog = data.filter(item => item.status === 'aprobado');
+            renderCatalog(publicCatalog);
+
+            // Cargar en el panel de control (todas las aeronaves para el admin)
+            renderAdminTable(data);
+        } catch (error) {
+            console.error('Error al cargar datos:', error);
+        }
+    }
+
+    // Renderizar tarjetas en el catálogo público
+    function renderCatalog(items) {
+        const catalogContainer = document.getElementById('aircraft-catalog');
+        if (!catalogContainer) return;
+
+        if (items.length === 0) {
+            catalogContainer.innerHTML = `<p class="col-span-3 text-center text-gray-500 py-8">No hay aeronaves disponibles públicamente en este momento.</p>`;
+            return;
+        }
+
+        catalogContainer.innerHTML = items.map(item => `
+            <div class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-100 hover:shadow-lg transition">
+                <div class="bg-slate-800 text-white p-4 flex justify-between items-center">
+                    <span class="text-xs font-semibold uppercase tracking-wider bg-blue-600 px-2 py-1 rounded">${item.category}</span>
+                    <span class="text-sm font-bold">${item.currency} $${Number(item.price).toLocaleString()}</span>
+                </div>
+                <div class="p-5">
+                    <h3 class="text-xl font-bold text-slate-800 mb-2">${item.title} (${item.year})</h3>
+                    <ul class="text-sm text-gray-600 space-y-1 mb-4">
+                        <li><strong>TTAF:</strong> ${item.ttaf} hrs</li>
+                        <li><strong>SMOH:</strong> ${item.smoh} hrs</li>
+                        <li><strong>Aviónica:</strong> ${item.avionics}</li>
+                        <li><strong>Ubicación:</strong> ${item.location}</li>
+                    </ul>
+                    <a href="https://wa.me/584161177334?text=Hola,%20estoy%20interesado%20en%20el%20avión%20ID:%20${item.id}%20(${encodeURIComponent(item.title)})" 
+                       target="_blank" 
+                       class="block text-center bg-blue-600 text-white font-medium py-2 rounded hover:bg-blue-700 transition">
+                       Consultar Broker
+                    </a>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    // Renderizar lista en el Panel de Control
+    function renderAdminTable(items) {
+        const adminTable = document.getElementById('admin-aircraft-table');
+        if (!adminTable) return;
+
+        adminTable.innerHTML = items.map(item => `
+            <tr class="border-b">
+                <td class="p-3 text-sm">${item.id}</td>
+                <td class="p-3 text-sm font-bold">${item.title}</td>
+                <td class="p-3 text-sm">${item.category}</td>
+                <td class="p-3 text-sm">$${Number(item.price).toLocaleString()}</td>
+                <td class="p-3 text-sm">
+                    <span class="px-2 py-1 rounded text-xs ${item.status === 'aprobado' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}">
+                        ${item.status}
+                    </span>
+                </td>
+                <td class="p-3 text-sm">
+                    ${item.status === 'pendiente' ? `
+                        <button onclick="approveAircraft('${item.id}')" class="bg-green-600 text-white px-3 py-1 rounded text-xs font-bold hover:bg-green-700">
+                            Aprobar
+                        </button>
+                    ` : '<span class="text-gray-400">Publicado</span>'}
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    // Guardar nueva aeronave desde el formulario
+    async function submitAircraftForm(event) {
+        event.preventDefault();
+        const payload = {
+            action: 'add',
+            title: document.getElementById('input-title').value,
+            category: document.getElementById('input-category').value,
+            price: document.getElementById('input-price').value,
+            currency: 'USD',
+            year: document.getElementById('input-year').value,
+            ttaf: document.getElementById('input-ttaf').value,
+            smoh: document.getElementById('input-smoh').value,
+            avionics: document.getElementById('input-avionics').value,
+            location: document.getElementById('input-location').value,
+            contact: document.getElementById('input-contact').value
+        };
+
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+        alert(result.message);
+        loadAircrafts();
+    }
+
+    // Aprobar publicación como Administrador
+    async function approveAircraft(id) {
+        const adminKey = prompt("Ingrese la clave de administrador para publicar:");
+        if (!adminKey) return;
+
+        const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'approve', id: id, adminKey: adminKey })
+        });
+
+        const result = await res.json();
+        alert(result.message);
+        loadAircrafts();
+    }
+
+    // Cargar al iniciar la página
+    document.addEventListener('DOMContentLoaded', loadAircrafts);
+</script>
 </body>
 </html>
