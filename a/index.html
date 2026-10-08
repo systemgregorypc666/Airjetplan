@@ -42,21 +42,16 @@
   </script>
   
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-    }
+    body { font-family: 'Inter', sans-serif; }
     .active-nav {
       color: #2563eb !important;
       border-bottom: 2px solid #2563eb;
     }
-    /* Smooth transitions */
     .tab-content {
       display: none;
       animation: fadeIn 0.3s ease-in-out;
     }
-    .tab-content.active {
-      display: block;
-    }
+    .tab-content.active { display: block; }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(4px); }
       to { opacity: 1; transform: translateY(0); }
@@ -100,12 +95,11 @@
 
         <!-- CTA & Mobile Menu Toggle -->
         <div class="flex items-center space-x-3">
-          <a href="https://wa.me/?text=Hola%20Airjetplan,%20deseo%20consultar%20sobre%20una%20aeronave." target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-all hover:shadow">
+          <a href="https://wa.me/584161177334?text=Hola%20Airjetplan,%20deseo%20consultar%20sobre%20una%20aeronave." target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold px-4 py-2.5 rounded-lg shadow-sm transition-all hover:shadow">
             <i class="fa-brands fa-whatsapp text-sm"></i>
             Broker Directo
           </a>
           
-          <!-- Mobile Menu Button -->
           <button onclick="toggleMobileMenu()" class="md:hidden text-slate-600 p-2 rounded-lg hover:bg-slate-100 focus:outline-none">
             <i class="fa-solid fa-bars text-xl" id="menu-icon"></i>
           </button>
@@ -134,7 +128,6 @@
           Mercado Global &amp; Corretaje de Aviación Privada
         </div>
 
-        <!-- Center Main Title -->
         <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-blue-700 mb-4">
           Airjetplan
         </h1>
@@ -179,7 +172,6 @@
     <!-- TAB 1: PRINCIPAL -->
     <section id="tab-principal" class="tab-content active max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       
-      <!-- Key Value Propositions -->
       <div class="grid md:grid-cols-3 gap-8 mb-16">
         <div class="p-6 rounded-2xl bg-slate-50 border border-slate-100 hover:shadow-md transition-shadow">
           <div class="w-12 h-12 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center mb-4 text-xl">
@@ -187,7 +179,7 @@
           </div>
           <h3 class="text-lg font-bold text-slate-900 mb-2">Brokerage Internacional</h3>
           <p class="text-slate-600 text-sm leading-relaxed">
-            Conectamos compradores y vendedores mediante contratos de corretaje transparentes (3% - 5% comisión). Manejo seguro de transacciones.
+            Conectamos compradores y vendedores mediante contratos de corretaje transparentes (3% - 5% comisión).
           </p>
         </div>
 
@@ -197,7 +189,7 @@
           </div>
           <h3 class="text-lg font-bold text-slate-900 mb-2">Inspección &amp; Historial TTAF/SMOH</h3>
           <p class="text-slate-600 text-sm leading-relaxed">
-            Verificación técnica rigurosa de horas de celda, remanente de motores y actualización de aviónica Garmin / Honeywell.
+            Verificación técnica rigurosa de horas de celda, remanente de motores y actualización de aviónica.
           </p>
         </div>
 
@@ -207,82 +199,49 @@
           </div>
           <h3 class="text-lg font-bold text-slate-900 mb-2">Logística Global &amp; Vuelos Charter</h3>
           <p class="text-slate-600 text-sm leading-relaxed">
-            Organización de vuelos trasatlánticos, matriculación, permisos de traslado y servicios de taxi aéreo privado.
+            Organización de vuelos trasatlánticos, matriculación y servicios de taxi aéreo privado.
           </p>
         </div>
       </div>
 
-      <!-- Commission Calculator Tool -->
+      <!-- Commission Calculator -->
       <div class="bg-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl mb-16">
         <div class="max-w-3xl">
           <span class="text-blue-400 font-bold uppercase tracking-wider text-xs">Herramienta de Simulación</span>
           <h2 class="text-2xl sm:text-3xl font-extrabold mt-1 mb-4">Calculadora de Comisión y Retorno de Corretaje</h2>
           <p class="text-slate-400 text-sm mb-8">
-            Estima el margen de ganancia por intermediación según el valor estimado de la aeronave en el mercado global.
+            Estima el margen de ganancia por intermediación según el valor estimado de la aeronave.
           </p>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6 bg-slate-800/80 p-6 rounded-2xl border border-slate-700">
           <div>
-            <label class="block text-xs text-slate-300 font-semibold mb-2">Precio de Venta de la Aeronave ($ USD)</label>
+            <label class="block text-xs text-slate-300 font-semibold mb-2">Precio de Venta ($ USD)</label>
             <input type="number" id="calc-price" value="120000" step="5000" oninput="calculateCommission()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white font-bold focus:outline-none focus:border-blue-500">
           </div>
           <div>
             <label class="block text-xs text-slate-300 font-semibold mb-2">Porcentaje de Comisión (%)</label>
             <select id="calc-rate" onchange="calculateCommission()" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-white font-bold focus:outline-none focus:border-blue-500">
-              <option value="0.05">5% (Estándar Monomotores / Avionetas)</option>
-              <option value="0.04">4% (Turbohélices / Medianos)</option>
-              <option value="0.03">3% (Jets Ejecutivos de Gran Valor)</option>
+              <option value="0.05">5% (Monomotores)</option>
+              <option value="0.04">4% (Turbohélices)</option>
+              <option value="0.03">3% (Jets Ejecutivos)</option>
             </select>
           </div>
           <div class="bg-blue-900/40 p-4 rounded-xl border border-blue-500/30 flex flex-col justify-center">
-            <span class="text-xs text-blue-300 font-semibold">Comisión Estimada de Venta</span>
+            <span class="text-xs text-blue-300 font-semibold">Comisión Estimada</span>
             <span id="calc-result" class="text-2xl sm:text-3xl font-extrabold text-blue-400">$6,000 USD</span>
           </div>
         </div>
-      </div>
-
-      <!-- Featured Aircraft Highlights Banner -->
-      <div class="flex justify-between items-end mb-8">
-        <div>
-          <h2 class="text-2xl font-bold text-slate-900">Aeronaves Destacadas</h2>
-          <p class="text-slate-500 text-sm">Unidades seleccionadas listas para inspección inmediata.</p>
-        </div>
-        <button onclick="switchTab('productos')" class="text-blue-700 font-bold text-sm hover:text-blue-800 flex items-center gap-1">
-          Ver Inventario Completo <i class="fa-solid fa-arrow-right text-xs"></i>
-        </button>
-      </div>
-
-      <div id="featured-aircraft-grid" class="grid md:grid-cols-3 gap-6">
-        <!-- Rendered dynamically via JS -->
       </div>
 
     </section>
 
     <!-- TAB 2: PRODUCTOS -->
     <section id="tab-productos" class="tab-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      
-      <!-- Catalog Controls & Filters -->
       <div class="flex flex-col md:flex-row justify-between items-center gap-4 mb-8 pb-6 border-b border-slate-200">
         <div>
           <h2 class="text-2xl font-extrabold text-slate-900">Catálogo de Aeronaves</h2>
-          <p class="text-slate-500 text-sm">Inventario actualizado con especificaciones TTAF y remanente de motores.</p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
-          <!-- Currency Switcher -->
-          <div class="bg-slate-100 p-1 rounded-lg flex items-center text-xs font-bold">
-            <button id="curr-usd" onclick="setCurrency('USD')" class="px-3 py-1.5 rounded-md bg-white text-slate-800 shadow-sm">USD ($)</button>
-            <button id="curr-eur" onclick="setCurrency('EUR')" class="px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-800">EUR (€)</button>
-          </div>
-
-          <!-- Category Filter -->
-          <select id="catalog-category-filter" onchange="filterCatalog()" class="bg-slate-50 text-slate-800 text-xs font-semibold rounded-lg p-2.5 border border-slate-200 focus:outline-none">
-            <option value="all">Categoría: Todas</option>
-            <option value="monomotor">Monomotores / Avionetas</option>
-            <option value="turboprop">Turbohélices</option>
-            <option value="jet">Jets Ejecutivos</option>
-          </select>
+          <p class="text-slate-500 text-sm">Inventario sincronizado con la base de datos de Airjetplan.</p>
         </div>
       </div>
 
@@ -290,14 +249,12 @@
       <div id="catalog-aircraft-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Dynamic Aircraft Cards loaded via JS -->
       </div>
-
     </section>
 
     <!-- TAB 3: CONTACTO -->
     <section id="tab-contacto" class="tab-content max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div class="bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden grid md:grid-cols-5">
         
-        <!-- Contact Info Side Panel -->
         <div class="md:col-span-2 bg-blue-700 text-white p-8 flex flex-col justify-between">
           <div>
             <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-6">
@@ -305,31 +262,22 @@
             </div>
             <h3 class="text-2xl font-bold mb-2">Contacto Broker</h3>
             <p class="text-blue-100 text-sm mb-8 leading-relaxed">
-              ¿Deseas comprar una aeronave, publicar tu equipo en venta o solicitar un vuelo charter? Atendemos solicitudes globales.
+              Atendemos solicitudes de compra, venta y charters a nivel mundial.
             </p>
 
             <div class="space-y-4 text-sm">
               <div class="flex items-start gap-3">
                 <i class="fa-solid fa-location-dot mt-1 text-blue-300"></i>
-                <span>San Cristóbal, Táchira, Venezuela (Oficina Regional)</span>
+                <span>San Cristóbal, Táchira, Venezuela</span>
               </div>
               <div class="flex items-center gap-3">
                 <i class="fa-solid fa-envelope text-blue-300"></i>
                 <span>contacto@airjetplan.com</span>
               </div>
-              <div class="flex items-center gap-3">
-                <i class="fa-solid fa-globe text-blue-300"></i>
-                <span>System Gregory PC Technology</span>
-              </div>
             </div>
-          </div>
-
-          <div class="mt-8 pt-6 border-t border-blue-600/50 text-xs text-blue-200">
-            Respuesta prioritaria en menos de 24 horas laborables.
           </div>
         </div>
 
-        <!-- Inquiry Form -->
         <div class="md:col-span-3 p-8">
           <form id="contact-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
             <div>
@@ -349,18 +297,8 @@
             </div>
 
             <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Tipo de Solicitud</label>
-              <select class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <option value="buy">Deseo Comprar una Aeronave</option>
-                <option value="sell">Deseo Vender / Publicar mi Avión (Brokerage)</option>
-                <option value="charter">Cotización de Vuelo Charter / Taxi Aéreo</option>
-                <option value="info">Información General de Servicios</option>
-              </select>
-            </div>
-
-            <div>
-              <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Detalles o Modelo de Interés</label>
-              <textarea rows="4" required placeholder="Indique modelo, horas de vuelo deseadas o presupuesto estimado..." class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+              <label class="block text-xs font-bold text-slate-600 uppercase mb-1">Mensaje</label>
+              <textarea rows="4" required placeholder="Detalles de la consulta..." class="w-full bg-slate-50 border border-slate-200 rounded-lg p-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
             </div>
 
             <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 px-6 rounded-lg shadow-md transition-all">
@@ -378,17 +316,17 @@
       <div class="flex items-center justify-between mb-8">
         <div>
           <span class="text-xs font-bold text-blue-700 uppercase tracking-widest">Administrador Airjetplan</span>
-          <h2 class="text-2xl font-extrabold text-slate-900">Panel de Control &amp; Gestión de Listados</h2>
+          <h2 class="text-2xl font-extrabold text-slate-900">Panel de Control &amp; Gestión Cloudflare KV</h2>
         </div>
         <div class="inline-flex items-center gap-2 bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-full border border-emerald-200">
           <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          Sistema Operativo Activo
+          Conectado a Base de Datos
         </div>
       </div>
 
       <div class="grid lg:grid-cols-3 gap-8">
         
-        <!-- Add Aircraft Listing Form -->
+        <!-- Add Aircraft Form -->
         <div class="lg:col-span-1 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
             <i class="fa-solid fa-plus-circle text-blue-700"></i>
@@ -418,7 +356,7 @@
 
             <div class="grid grid-cols-2 gap-3">
               <div>
-                <label class="block font-semibold text-slate-700 mb-1">Año de Fabricación</label>
+                <label class="block font-semibold text-slate-700 mb-1">Año</label>
                 <input type="number" id="admin-year" required placeholder="1982" class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
               </div>
               <div>
@@ -434,19 +372,19 @@
 
             <div>
               <label class="block font-semibold text-slate-700 mb-1">URL Fotografía</label>
-              <input type="url" id="admin-image" required placeholder="https://..." class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
+              <input type="url" id="admin-image" placeholder="https://..." class="w-full bg-slate-50 border border-slate-200 rounded-lg p-2.5">
             </div>
 
             <button type="submit" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 rounded-lg shadow transition-all">
-              Publicar en Catálogo Live
+              Guardar en Base de Datos KV
             </button>
           </form>
         </div>
 
-        <!-- Inventory Management Table -->
+        <!-- Inventory Table -->
         <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
           <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center justify-between">
-            <span>Aeronaves Publicadas en Sistema</span>
+            <span>Listado General KV</span>
             <span id="inventory-count" class="text-xs bg-blue-100 text-blue-800 px-2.5 py-1 rounded-full font-bold">0 Unidades</span>
           </h3>
 
@@ -462,7 +400,7 @@
                 </tr>
               </thead>
               <tbody id="admin-inventory-table" class="divide-y divide-slate-100 text-slate-700 font-medium">
-                <!-- Table rows populated dynamically -->
+                <!-- Table rows populated dynamically via KV -->
               </tbody>
             </table>
           </div>
@@ -473,120 +411,178 @@
 
   </main>
 
-  <!-- FOOTER SECTION -->
+  <!-- FOOTER -->
   <footer class="bg-slate-900 text-white border-t border-slate-800 mt-auto">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-      
-      <div class="flex flex-col md:flex-row justify-between items-center gap-6 pb-8 border-b border-slate-800">
-        <!-- Logo & Tagline -->
-        <div class="flex items-center space-x-3">
-          <div class="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center font-bold">
-            <i class="fa-solid fa-plane-up text-sm"></i>
-          </div>
-          <div>
-            <span class="text-lg font-extrabold tracking-tight text-white block leading-none">Airjetplan</span>
-            <span class="text-[9px] tracking-widest uppercase text-slate-400 block mt-0.5">Air Brokerage &amp; Logistics</span>
-          </div>
-        </div>
-
-        <!-- Quick Links -->
-        <div class="flex flex-wrap justify-center gap-6 text-xs text-slate-400 font-medium">
-          <button onclick="switchTab('principal')" class="hover:text-white transition-colors">Principal</button>
-          <button onclick="switchTab('productos')" class="hover:text-white transition-colors">Catálogo Aeronaves</button>
-          <button onclick="switchTab('contacto')" class="hover:text-white transition-colors">Atención al Cliente</button>
-          <button onclick="switchTab('panel')" class="hover:text-white transition-colors">Panel Control</button>
-        </div>
-      </div>
-
-      <!-- Copyright Notice -->
-      <div class="pt-6 text-center text-xs text-slate-400 font-normal">
-        <p class="mb-1">@ 2022-2026 Airjetplan. Todos los derechos reservados.</p>
-        <p class="text-[10px] text-slate-400">Desarrollado e impulsado por System Gregory PC Technology Services.</p>
-      </div>
-
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 text-center text-xs text-slate-400 font-normal">
+      <p class="mb-1">@ 2022-2026 Airjetplan. Todos los derechos reservados.</p>
+      <p class="text-[10px] text-slate-400">Desarrollado e impulsado por System Gregory PC Technology Services.</p>
     </div>
   </footer>
 
-  <!-- Modal Notification Overlay -->
+  <!-- Modal Overlay -->
   <div id="modal-notice" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl p-6 max-w-sm w-full text-center shadow-2xl border border-slate-100">
       <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4 text-xl">
         <i class="fa-solid fa-check"></i>
       </div>
       <h3 id="modal-title" class="text-lg font-bold text-slate-900 mb-2">Operación Exitosa</h3>
-      <p id="modal-msg" class="text-xs text-slate-600 mb-6 leading-relaxed">Su solicitud ha sido procesada correctamente.</p>
+      <p id="modal-msg" class="text-xs text-slate-600 mb-6 leading-relaxed">Procesado en el servidor.</p>
       <button onclick="closeModal()" class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-2.5 rounded-lg text-xs">
         Aceptar
       </button>
     </div>
   </div>
 
-  <!-- APPLICATION JAVASCRIPT LOGIC -->
+  <!-- BACKEND CONNECTED JAVASCRIPT LOGIC -->
   <script>
-    // Initial Aircraft State Data
-    let aircraftData = [
-      {
-        id: 1,
-        title: "Cessna 172N Skyhawk",
-        category: "monomotor",
-        priceUSD: 115000,
-        year: 1979,
-        smoh: "420 hrs (Lycoming O-320)",
-        ttaf: "3,850 hrs Total",
-        location: "EE. UU. (Matrícula N)",
-        image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
-        featured: true
-      },
-      {
-        id: 2,
-        title: "Beechcraft King Air B200",
-        category: "turboprop",
-        priceUSD: 1250000,
-        year: 1998,
-        smoh: "1,100 hrs (Pratt & Whitney PT6A)",
-        ttaf: "5,400 hrs Total",
-        location: "Europa (EASA / España)",
-        image: "https://images.unsplash.com/photo-1519074069444-1ba4eaa1674a?auto=format&fit=crop&w=800&q=80",
-        featured: true
-      },
-      {
-        id: 3,
-        title: "Cessna Citation CJ2",
-        category: "jet",
-        priceUSD: 2450000,
-        year: 2004,
-        smoh: "1,850 hrs (Williams FJ44-2C)",
-        ttaf: "4,200 hrs Total",
-        location: "EE. UU. / Florida",
-        image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80",
-        featured: true
-      },
-      {
-        id: 4,
-        title: "Piper Seneca III PA-34",
-        category: "monomotor",
-        priceUSD: 185000,
-        year: 1984,
-        smoh: "650 hrs SMOH",
-        ttaf: "4,100 hrs Total",
-        location: "Latinoamérica (Caribe)",
-        image: "https://images.unsplash.com/photo-1519074069444-1ba4eaa1674a?auto=format&fit=crop&w=800&q=80",
-        featured: false
+    const API_URL = '/api';
+
+    // 1. Cargar aeronaves desde Cloudflare KV
+    async function loadAircrafts() {
+      try {
+        const response = await fetch(API_URL);
+        if (!response.ok) return;
+        const data = await response.json();
+        
+        // Catálogo público: solo muestra las aprobadas
+        const publicCatalog = data.filter(item => item.status === 'aprobado');
+        renderPublicCatalog(publicCatalog);
+
+        // Panel de control: muestra todas (pendientes y aprobadas)
+        renderAdminTable(data);
+      } catch (error) {
+        console.error('Error al conectar con la API KV:', error);
       }
-    ];
+    }
 
-    let currentCurrency = 'USD';
-    const EUR_RATE = 0.92; // Conversion rate multiplier
+    // 2. Renderizar catálogo público
+    function renderPublicCatalog(items) {
+      const container = document.getElementById('catalog-aircraft-grid');
+      if (!container) return;
 
-    // Initialize Page
-    document.addEventListener("DOMContentLoaded", () => {
-      renderCatalog();
-      renderFeatured();
-      renderAdminInventory();
-      calculateCommission();
-    });
+      if (items.length === 0) {
+        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">No hay aeronaves aprobadas en la base de datos KV.</div>`;
+        return;
+      }
 
-    // Tab Navigation Switcher
+      container.innerHTML = items.map(a => `
+        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
+          <div>
+            <div class="relative h-48 bg-slate-100 overflow-hidden">
+              <img src="${a.image || 'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80'}" alt="${a.title}" class="w-full h-full object-cover">
+              <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
+                ${a.category}
+              </span>
+              <span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-black px-2.5 py-1 rounded-md shadow">
+                $${Number(a.price).toLocaleString()} ${a.currency || 'USD'}
+              </span>
+            </div>
+            <div class="p-5">
+              <h3 class="text-lg font-extrabold text-slate-900 mb-2">${a.title} (${a.year || 'N/D'})</h3>
+              <div class="space-y-1.5 text-xs text-slate-500 mb-4">
+                <div class="flex items-center gap-2"><i class="fa-solid fa-gauge-high text-blue-600 w-4"></i> Motor (SMOH): <span class="font-semibold text-slate-700">${a.smoh || 'N/D'}</span></div>
+                <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-blue-600 w-4"></i> Ubicación: <span class="font-semibold text-slate-700">${a.location || 'N/D'}</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <a href="https://wa.me/584161177334?text=Hola,%20deseo%20información%20de%20la%20aeronave:%20${encodeURIComponent(a.title)}" 
+               target="_blank" 
+               class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2.5 px-4 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
+              <i class="fa-solid fa-paper-plane"></i> Consultar Broker
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 3. Renderizar tabla en el Panel de Control
+    function renderAdminTable(items) {
+      const tbody = document.getElementById('admin-inventory-table');
+      const countEl = document.getElementById('inventory-count');
+      if (!tbody) return;
+
+      if (countEl) countEl.innerText = `${items.length} Unidades`;
+
+      tbody.innerHTML = items.map(a => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="p-3 font-bold text-slate-900">${a.title}</td>
+          <td class="p-3 uppercase text-[10px] font-bold text-blue-700">${a.category}</td>
+          <td class="p-3 font-semibold text-slate-800">$${Number(a.price).toLocaleString()} USD</td>
+          <td class="p-3">
+            <span class="text-[10px] px-2 py-0.5 rounded font-bold ${a.status === 'aprobado' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+              ${a.status || 'pendiente'}
+            </span>
+          </td>
+          <td class="p-3 text-right">
+            ${a.status === 'pendiente' ? `
+              <button onclick="approveAircraft('${a.id}')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-3 py-1 rounded text-xs transition-colors">
+                Aprobar
+              </button>
+            ` : '<span class="text-xs text-slate-400 font-semibold">Publicado</span>'}
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    // 4. Guardar nueva aeronave desde el formulario a KV
+    async function addNewAircraft(e) {
+      e.preventDefault();
+
+      const payload = {
+        action: 'add',
+        title: document.getElementById('admin-title').value,
+        category: document.getElementById('admin-category').value,
+        price: document.getElementById('admin-price').value,
+        currency: 'USD',
+        year: document.getElementById('admin-year').value,
+        smoh: document.getElementById('admin-smoh').value,
+        ttaf: "Horas Verificadas",
+        location: document.getElementById('admin-location').value,
+        image: document.getElementById('admin-image').value
+      };
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await res.json();
+        showModal("Enviado a Base de Datos", result.message || "Guardado como pendiente en Cloudflare KV.");
+        e.target.reset();
+        loadAircrafts();
+      } catch (err) {
+        alert("Error de conexión al guardar en KV.");
+      }
+    }
+
+    // 5. Aprobar aeronave con Clave de Administrador
+    async function approveAircraft(id) {
+      const adminKey = prompt("Ingrese la clave de administrador para aprobar en KV:");
+      if (!adminKey) return;
+
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'approve', id: id, adminKey: adminKey })
+        });
+
+        const result = await res.json();
+        if (result.success) {
+          showModal("Aprobación Exitosa", "La aeronave se ha publicado globalmente.");
+          loadAircrafts();
+        } else {
+          alert("Error: " + result.message);
+        }
+      } catch (err) {
+        alert("Error de comunicación con el backend.");
+      }
+    }
+
+    // Navegación de Pestañas
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.nav-link').forEach(el => el.classList.remove('active-nav'));
@@ -600,203 +596,22 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Toggle Mobile Navigation Menu
     function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      menu.classList.toggle('hidden');
+      document.getElementById('mobile-menu').classList.toggle('hidden');
     }
 
-    // Currency Switcher
-    function setCurrency(curr) {
-      currentCurrency = curr;
-      const btnUsd = document.getElementById('curr-usd');
-      const btnEur = document.getElementById('curr-eur');
-
-      if (curr === 'USD') {
-        btnUsd.className = "px-3 py-1.5 rounded-md bg-white text-slate-800 shadow-sm font-bold";
-        btnEur.className = "px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-800 font-bold";
-      } else {
-        btnEur.className = "px-3 py-1.5 rounded-md bg-white text-slate-800 shadow-sm font-bold";
-        btnUsd.className = "px-3 py-1.5 rounded-md text-slate-500 hover:text-slate-800 font-bold";
-      }
-
-      renderCatalog();
-      renderFeatured();
-    }
-
-    // Helper to format currency
-    function formatMoney(amountUSD) {
-      if (currentCurrency === 'EUR') {
-        return '€' + Math.round(amountUSD * EUR_RATE).toLocaleString() + ' EUR';
-      }
-      return '$' + amountUSD.toLocaleString() + ' USD';
-    }
-
-    // Create Card HTML Helper
-    function createAircraftCardHTML(a) {
-      return `
-        <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition-all flex flex-col justify-between">
-          <div>
-            <div class="relative h-48 bg-slate-100 overflow-hidden">
-              <img src="${a.image}" alt="${a.title}" class="w-full h-full object-cover transition-transform duration-500 hover:scale-105" onerror="this.src='https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=800&q=80'">
-              <span class="absolute top-3 left-3 bg-slate-900/80 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
-                ${a.category}
-              </span>
-              <span class="absolute top-3 right-3 bg-blue-600 text-white text-xs font-black px-2.5 py-1 rounded-md shadow">
-                ${formatMoney(a.priceUSD)}
-              </span>
-            </div>
-            <div class="p-5">
-              <h3 class="text-lg font-extrabold text-slate-900 mb-2">${a.title}</h3>
-              <div class="space-y-1.5 text-xs text-slate-500 mb-4">
-                <div class="flex items-center gap-2"><i class="fa-solid fa-calendar text-blue-600 w-4"></i> Año: <span class="font-semibold text-slate-700">${a.year}</span></div>
-                <div class="flex items-center gap-2"><i class="fa-solid fa-gauge-high text-blue-600 w-4"></i> Motor (SMOH): <span class="font-semibold text-slate-700">${a.smoh}</span></div>
-                <div class="flex items-center gap-2"><i class="fa-solid fa-plane text-blue-600 w-4"></i> Celda (TTAF): <span class="font-semibold text-slate-700">${a.ttaf || 'N/D'}</span></div>
-                <div class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-blue-600 w-4"></i> Ubicación: <span class="font-semibold text-slate-700">${a.location}</span></div>
-              </div>
-            </div>
-          </div>
-          <div class="p-5 pt-0">
-            <button onclick="requestInfo('${a.title}')" class="w-full bg-slate-100 hover:bg-blue-600 hover:text-white text-slate-800 font-bold py-2.5 px-4 rounded-xl text-xs transition-colors flex items-center justify-center gap-2">
-              <i class="fa-solid fa-paper-plane"></i> Solicitar Broker
-            </button>
-          </div>
-        </div>
-      `;
-    }
-
-    // Render Featured Aircraft Cards in Principal Tab
-    function renderFeatured() {
-      const container = document.getElementById('featured-aircraft-grid');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const featured = aircraftData.filter(a => a.featured).slice(0, 3);
-      featured.forEach(a => {
-        container.innerHTML += createAircraftCardHTML(a);
-      });
-    }
-
-    // Render Full Catalog Grid
-    function renderCatalog() {
-      const container = document.getElementById('catalog-aircraft-grid');
-      if (!container) return;
-      
-      const filterSelect = document.getElementById('catalog-category-filter');
-      const filter = filterSelect ? filterSelect.value : 'all';
-      container.innerHTML = '';
-
-      const filtered = aircraftData.filter(a => filter === 'all' || a.category === filter);
-
-      if (filtered.length === 0) {
-        container.innerHTML = `<div class="col-span-full text-center py-12 text-slate-400 font-medium">No hay aeronaves disponibles en esta categoría.</div>`;
-        return;
-      }
-
-      filtered.forEach(a => {
-        container.innerHTML += createAircraftCardHTML(a);
-      });
-    }
-
-    // Filter Catalog Trigger
-    function filterCatalog() {
-      renderCatalog();
-    }
-
-    // Execute Hero Search
-    function executeHeroSearch() {
-      const type = document.getElementById('hero-type-filter').value;
-      const catSelect = document.getElementById('catalog-category-filter');
-      if (catSelect) catSelect.value = type;
-      
-      switchTab('productos');
-      renderCatalog();
-    }
-
-    // Calculate Commission Tool
     function calculateCommission() {
       const price = parseFloat(document.getElementById('calc-price').value) || 0;
       const rate = parseFloat(document.getElementById('calc-rate').value) || 0;
-      const total = price * rate;
-      
-      document.getElementById('calc-result').innerText = '$' + Math.round(total).toLocaleString() + ' USD';
+      document.getElementById('calc-result').innerText = '$' + Math.round(price * rate).toLocaleString() + ' USD';
     }
 
-    // Request Info Action
-    function requestInfo(title) {
-      switchTab('contacto');
-      const text = document.querySelector('#contact-form textarea');
-      if (text) text.value = `Deseo obtener información detallada sobre la aeronave: ${title}`;
-    }
-
-    // Form Submit Handler
     function handleFormSubmit(e) {
       e.preventDefault();
-      showModal("Consulta Enviada", "Un agente broker de Airjetplan revisará su solicitud y se pondrá en contacto pronto.");
+      showModal("Consulta Enviada", "Un agente broker de Airjetplan revisará su solicitud.");
       e.target.reset();
     }
 
-    // Admin: Render Inventory Table
-    function renderAdminInventory() {
-      const tbody = document.getElementById('admin-inventory-table');
-      const countEl = document.getElementById('inventory-count');
-      if (!tbody) return;
-
-      tbody.innerHTML = '';
-      if (countEl) countEl.innerText = `${aircraftData.length} Unidades`;
-
-      aircraftData.forEach(a => {
-        tbody.innerHTML += `
-          <tr class="hover:bg-slate-50 transition-colors">
-            <td class="p-3 font-bold text-slate-900">${a.title}</td>
-            <td class="p-3 uppercase text-[10px] font-bold text-blue-700">${a.category}</td>
-            <td class="p-3 font-semibold text-slate-800">$${a.priceUSD.toLocaleString()} USD</td>
-            <td class="p-3"><span class="bg-emerald-100 text-emerald-800 text-[10px] px-2 py-0.5 rounded font-bold">Disponible</span></td>
-            <td class="p-3 text-right">
-              <button onclick="deleteAircraft(${a.id})" class="text-rose-600 hover:text-rose-800 font-bold px-2 py-1 rounded hover:bg-rose-50 transition-colors">
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            </td>
-          </tr>
-        `;
-      });
-    }
-
-    // Admin: Add New Aircraft
-    function addNewAircraft(e) {
-      e.preventDefault();
-
-      const newAircraft = {
-        id: Date.now(),
-        title: document.getElementById('admin-title').value,
-        category: document.getElementById('admin-category').value,
-        priceUSD: parseFloat(document.getElementById('admin-price').value) || 0,
-        year: parseInt(document.getElementById('admin-year').value) || new Date().getFullYear(),
-        smoh: document.getElementById('admin-smoh').value,
-        ttaf: "Horas Verificadas",
-        location: document.getElementById('admin-location').value,
-        image: document.getElementById('admin-image').value,
-        featured: true
-      };
-
-      aircraftData.unshift(newAircraft);
-      renderCatalog();
-      renderFeatured();
-      renderAdminInventory();
-
-      e.target.reset();
-      showModal("Aeronave Publicada", "La nueva aeronave se ha insertado con éxito en el catálogo en vivo.");
-    }
-
-    // Admin: Delete Aircraft
-    function deleteAircraft(id) {
-      aircraftData = aircraftData.filter(a => a.id !== id);
-      renderCatalog();
-      renderFeatured();
-      renderAdminInventory();
-    }
-
-    // Modal Helpers
     function showModal(title, msg) {
       document.getElementById('modal-title').innerText = title;
       document.getElementById('modal-msg').innerText = msg;
@@ -806,6 +621,12 @@
     function closeModal() {
       document.getElementById('modal-notice').classList.add('hidden');
     }
+
+    // Inicializar al cargar
+    document.addEventListener("DOMContentLoaded", () => {
+      loadAircrafts();
+      calculateCommission();
+    });
   </script>
 </body>
 </html>
