@@ -1,9 +1,7 @@
 // Cloudflare Pages Function: Backend de Airjetplan
 export async function onRequest(context) {
   const { request, env } = context;
-  const url = new URL(request.url);
 
-  // Cabeceras CORS
   const corsHeaders = {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
@@ -15,14 +13,29 @@ export async function onRequest(context) {
     return new Response(null, { headers: corsHeaders });
   }
 
-  // 1. OBTENER TODAS LAS AERONAVES (GET)
+  // 1. OBTENER AERONAVES (GET)
   if (request.method === 'GET') {
     const data = await env.AIRJETPLAN_KV.get('aircraft_list');
-    const aircrafts = data ? JSON.parse(data) : [];
+    let aircrafts = data ? JSON.parse(data) : [];
+
+    // Por seguridad, si la petición no incluye clave de admin, limpiamos los datos de contacto privados del vendedor
+    const url = new URL(request.url);
+    const isAdmin = url.searchParams.get('adminKey') === 'SystemGregory2026';
+
+    if (!isAdmin) {
+      aircrafts = aircrafts.map(item => {
+        const publicItem = { ...item };
+        delete publicItem.sellerName;
+        delete publicItem.sellerPhone;
+        delete publicItem.sellerEmail;
+        return publicItem;
+      });
+    }
+
     return new Response(JSON.stringify(aircrafts), { headers: corsHeaders });
   }
 
-  // 2. PUBLICAR NUEVA AERONAVE O APROBAR (POST)
+  // 2. REGISTRAR O APROBAR AERONAVE (POST)
   if (request.method === 'POST') {
     try {
       const body = await request.json();
@@ -30,7 +43,6 @@ export async function onRequest(context) {
       let aircrafts = currentData ? JSON.parse(currentData) : [];
 
       if (body.action === 'add') {
-        // Nueva aeronave enviada por un usuario (Pendiente por defecto)
         const newAircraft = {
           id: 'AIR-' + Date.now(),
           title: body.title,
@@ -38,25 +50,26 @@ export async function onRequest(context) {
           price: body.price,
           currency: body.currency || 'USD',
           year: body.year,
-          ttaf: body.ttaf,
           smoh: body.smoh,
-          avionics: body.avionics,
           location: body.location,
-          contact: body.contact,
-          status: 'pendiente', // Requiere tu aprobación
+          image: body.image,
+          // Datos Privados del Propietario (Solo visibles para el Admin)
+          sellerName: body.sellerName || 'No indicado',
+          sellerPhone: body.sellerPhone || 'No indicado',
+          sellerEmail: body.sellerEmail || 'No indicado',
+          status: 'pendiente',
           createdAt: new Date().toISOString()
         };
         aircrafts.push(newAircraft);
         await env.AIRJETPLAN_KV.put('aircraft_list', JSON.stringify(aircrafts));
-        return new Response(JSON.stringify({ success: true, message: 'Aeronave enviada para revisión.' }), { headers: corsHeaders });
+        return new Response(JSON.stringify({ success: true, message: 'Aeronave registrada como pendiente. Un broker la revisará.' }), { headers: corsHeaders });
       }
 
       if (body.action === 'approve') {
-        // Validación de clave de administrador
         if (body.adminKey !== 'SystemGregory2026') {
-          return new Response(JSON.stringify({ success: false, message: 'Clave no válida.' }), { status: 403, headers: corsHeaders });
+          return new Response(JSON.stringify({ success: false, message: 'Clave de administrador incorrecta.' }), { status: 403, headers: corsHeaders });
         }
-        
+
         aircrafts = aircrafts.map(item => {
           if (item.id === body.id) {
             item.status = 'aprobado';
@@ -64,10 +77,10 @@ export async function onRequest(context) {
           return item;
         });
         await env.AIRJETPLAN_KV.put('aircraft_list', JSON.stringify(aircrafts));
-        return new Response(JSON.stringify({ success: true, message: 'Aeronave aprobada públicamente.' }), { headers: corsHeaders });
+        return new Response(JSON.stringify({ success: true, message: 'Aeronave aprobada en el catálogo público.' }), { headers: corsHeaders });
       }
 
-      return new Response(JSON.stringify({ success: false, message: 'Acción no reconocida.' }), { status: 400, headers: corsHeaders });
+      return new Response(JSON.stringify({ success: false, message: 'Acción no válida.' }), { status: 400, headers: corsHeaders });
     } catch (err) {
       return new Response(JSON.stringify({ success: false, error: err.message }), { status: 500, headers: corsHeaders });
     }
